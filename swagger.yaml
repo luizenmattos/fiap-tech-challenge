@@ -21,7 +21,7 @@ externalDocs:
 servers:
   - url: https://petstore3.swagger.io/api/v3
 paths:
-  /user:
+  /users:
     post:
       tags:
         - User
@@ -41,18 +41,19 @@ paths:
                 email:
                   type: string
                   example: john@email.com
-                userlogin:
+                login:
                   type: string
-                  example: theUser
+                  example: 'carlos1234'
                 password:
                   type: string
                   example: '12345'
-                adress:
-                  type: string
-                  example: '12345'
-                tipoUser:
+                userType:
                   type: string
                   example: 'adm'
+                adress:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/adress'
       responses:
         '200':
           description: successful operation
@@ -75,24 +76,12 @@ paths:
       responses:
         '200':
           description: successful operation
-          headers:
-            X-Rate-Limit:
-              description: calls per hour allowed by the user
-              schema:
-                type: integer
-                format: int32
-            X-Expires-After:
-              description: date in UTC when token expires
-              schema:
-                type: string
-                format: date-time
           content:
-            application/xml:
-              schema:
-                type: string
             application/json:
               schema:
-                type: string
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
         '400':
           description: Invalid username/password supplied
         default:
@@ -101,7 +90,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-  /user/{id}:
+  /users/{id}:
     delete:
       tags:
         - User
@@ -159,7 +148,34 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-  /user/changepassword/{email}:
+  /users/{name}:
+    get:
+      tags:
+        - User
+      summary: Logs user into the system.
+      parameters:
+        - name: name
+          in: path
+          description: Id should be to change
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: Invalid username/password supplied
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /users/changepassword/{email}:
     put:
       tags:
         - User
@@ -191,7 +207,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-  /user/login:
+  /users/login:
     post:
       tags:
         - User
@@ -208,8 +224,37 @@ paths:
                 password:
                   type: string
                   example: '12345566'
+      responses:
+        '200':
+          description: successful operation
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                    example: 'Api-token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNjk0ODU2MDAwLCJleHAiOjE2OTQ4NTk2MDB9.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'
+
 components:
   schemas:
+    adress:
+      type: object
+      properties:
+        street:
+          type: string
+          example: 'Rua do carmo'
+        city:
+          type: string
+          example: 'barueri'
+        state:
+          type: string
+          example: 'SP'
+        country:
+          type: string
+          example: 'Brasil'
     User:
       type: object
       properties:
@@ -226,12 +271,13 @@ components:
         userlogin:
           type: string
           example: theUser
-        password:
+        userType:
           type: string
-          example: '12345'
+          example: 'adm'
         adress:
-          type: string
-          example: '12345'
+          type: array
+          items:
+            $ref: '#/components/schemas/adress'
     Error:
       type: object
       properties:
