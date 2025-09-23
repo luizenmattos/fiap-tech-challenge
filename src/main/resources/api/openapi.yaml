@@ -33,27 +33,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                name:
-                  type: string
-                  example: John
-                email:
-                  type: string
-                  example: john@email.com
-                login:
-                  type: string
-                  example: 'carlos1234'
-                password:
-                  type: string
-                  example: '12345'
-                userType:
-                  type: string
-                  example: 'adm'
-                adress:
-                  type: array
-                  items:
-                    $ref: '#/components/schemas/adress'
+              $ref: '#/components/schemas/UserLogin'
       responses:
         '200':
           description: successful operation
@@ -134,7 +114,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/User'
+              $ref: '#/components/schemas/UserLogin'
       responses:
         '200':
           description: Successful operation
@@ -192,11 +172,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                newpassword:
-                  type: string
-                  example: John
+              $ref: "#/components/schemas/newPassword"
 
       responses:
         '200':
@@ -216,14 +192,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                login:
-                  type: string
-                  example: 'carlos123'
-                password:
-                  type: string
-                  example: '12345566'
+              $ref: "#/components/schemas/login"
       responses:
         '200':
           description: successful operation
@@ -240,6 +209,21 @@ paths:
 
 components:
   schemas:
+    login:
+      type: object
+      properties:
+        login:
+          type: string
+          example: 'carlos123'
+        password:
+          type: string
+          example: '12345566'
+    newPassword:
+      type: object
+      properties:
+        newpassword:
+          type: string
+          example: John
     adress:
       type: object
       properties:
@@ -271,6 +255,28 @@ components:
         userlogin:
           type: string
           example: theUser
+        userType:
+          type: string
+          example: 'adm'
+        adress:
+          type: array
+          items:
+            $ref: '#/components/schemas/adress'
+    UserLogin:
+      type: object
+      properties:
+        name:
+          type: string
+          example: John
+        email:
+          type: string
+          example: john@email.com
+        login:
+          type: string
+          example: 'carlos1234'
+        password:
+          type: string
+          example: '12345'
         userType:
           type: string
           example: 'adm'
