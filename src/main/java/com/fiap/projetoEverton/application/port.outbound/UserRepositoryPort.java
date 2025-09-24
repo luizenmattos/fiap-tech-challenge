@@ -1,6 +1,6 @@
-package com.fiap.techchallenge1_G13.application.port.outbound;
+package com.fiap.projetoEverton.application.port.outbound;
 
-import com.fiap.techchallenge1_G13.domain.model.User;
+import com.fiap.projetoEverton.domain.model.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

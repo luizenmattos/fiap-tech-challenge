@@ -1,8 +1,8 @@
-package com.fiap.techchallenge1_G13.application.service.impl;
+package com.fiap.projetoEverton.application.service.impl;
 
-import com.fiap.techchallenge1_G13.application.port.outbound.UserRepositoryPort;
-import com.fiap.techchallenge1_G13.application.service.UserUseCase;
-import com.fiap.techchallenge1_G13.domain.model.User;
+import com.fiap.projetoEverton.application.port.outbound.UserRepositoryPort;
+import com.fiap.projetoEverton.application.service.UserUseCase;
+import com.fiap.projetoEverton.domain.model.User;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

@@ -1,4 +1,4 @@
-package com.fiap.techchallenge1_G13.adapters.inbound.web.dto;
+package com.fiap.projetoEverton.adapters.inbound.web.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

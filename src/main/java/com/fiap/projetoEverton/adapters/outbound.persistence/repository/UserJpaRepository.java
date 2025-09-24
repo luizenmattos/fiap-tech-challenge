@@ -1,13 +1,14 @@
-package com.fiap.techchallenge1_G13.adapters.outbound.persistence.repository;
+package com.fiap.projetoEverton.adapters.outbound.persistence.repository;
 
-import com.fiap.techchallenge1_G13.adapters.outbound.persistence.entity.UserJpaEntity;
-import com.fiap.techchallenge1_G13.domain.model.User;
+import com.fiap.projetoEverton.adapters.outbound.persistence.entity.UserJpaEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
+@Repository
 public interface UserJpaRepository extends JpaRepository<UserJpaEntity, Long> {
 
     Optional<UserJpaEntity> findByEmailIgnoreCase(String email);

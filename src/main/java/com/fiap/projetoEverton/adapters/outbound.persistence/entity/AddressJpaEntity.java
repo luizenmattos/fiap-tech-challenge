@@ -1,4 +1,4 @@
-package com.fiap.techchallenge1_G13.adapters.outbound.persistence.entity;
+package com.fiap.projetoEverton.adapters.outbound.persistence.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;

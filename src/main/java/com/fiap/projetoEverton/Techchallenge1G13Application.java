@@ -1,4 +1,4 @@
-package com.fiap.techchallenge1_G13;
+package com.fiap.projetoEverton;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

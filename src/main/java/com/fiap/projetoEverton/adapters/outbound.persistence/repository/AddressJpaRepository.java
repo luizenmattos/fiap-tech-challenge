@@ -1,7 +1,9 @@
-package com.fiap.techchallenge1_G13.adapters.outbound.persistence.repository;
+package com.fiap.projetoEverton.adapters.outbound.persistence.repository;
 
-import com.fiap.techchallenge1_G13.domain.model.Address;
+import com.fiap.projetoEverton.adapters.outbound.persistence.entity.AddressJpaEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface AddressJpaRepository extends JpaRepository<Address, Long> {
+@Repository
+public interface AddressJpaRepository extends JpaRepository<AddressJpaEntity, Long> {
 }

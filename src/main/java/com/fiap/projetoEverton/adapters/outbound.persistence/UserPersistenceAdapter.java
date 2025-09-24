@@ -1,12 +1,12 @@
-package com.fiap.techchallenge1_G13.adapters.outbound.persistence;
+package com.fiap.projetoEverton.adapters.outbound.persistence;
 
-import com.fiap.techchallenge1_G13.adapters.outbound.persistence.entity.AddressJpaEntity;
-import com.fiap.techchallenge1_G13.adapters.outbound.persistence.entity.UserJpaEntity;
-import com.fiap.techchallenge1_G13.adapters.outbound.persistence.repository.AddressJpaRepository;
-import com.fiap.techchallenge1_G13.adapters.outbound.persistence.repository.UserJpaRepository;
-import com.fiap.techchallenge1_G13.application.port.outbound.UserRepositoryPort;
-import com.fiap.techchallenge1_G13.domain.model.Address;
-import com.fiap.techchallenge1_G13.domain.model.User;
+import com.fiap.projetoEverton.adapters.outbound.persistence.entity.AddressJpaEntity;
+import com.fiap.projetoEverton.adapters.outbound.persistence.entity.UserJpaEntity;
+import com.fiap.projetoEverton.adapters.outbound.persistence.repository.AddressJpaRepository;
+import com.fiap.projetoEverton.adapters.outbound.persistence.repository.UserJpaRepository;
+import com.fiap.projetoEverton.application.port.outbound.UserRepositoryPort;
+import com.fiap.projetoEverton.domain.model.Address;
+import com.fiap.projetoEverton.domain.model.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
@@ -48,8 +48,6 @@ public class UserPersistenceAdapter implements UserRepositoryPort {
 
     @Override
     public Page<User> findByNameContaining(String name, Pageable pageable) {
-        // aqui, userJpaRepository retorna Page<UserJpaEntity>
-        // map espera Function<UserJpaEntity, User> -> this::toDomain aceita UserJpaEntity -> ok
         return userJpaRepository.findByNameContainingIgnoreCase(name, pageable)
                 .map(this::toDomain);
     }
