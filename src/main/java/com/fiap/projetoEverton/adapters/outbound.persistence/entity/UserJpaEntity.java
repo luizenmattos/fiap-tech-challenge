@@ -1,9 +1,6 @@
-package com.fiap.techchallenge1_G13.adapters.outbound.persistence.entity;
+package com.fiap.projetoEverton.adapters.outbound.persistence.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 import java.time.Instant;

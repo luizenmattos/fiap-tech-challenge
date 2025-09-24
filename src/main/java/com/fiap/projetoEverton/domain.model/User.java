@@ -1,4 +1,4 @@
-package com.fiap.techchallenge1_G13.domain.model;
+package com.fiap.projetoEverton.domain.model;
 
 import java.time.Instant;
 
