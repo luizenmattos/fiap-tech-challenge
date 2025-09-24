@@ -157,54 +157,6 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 
-			<!-- build helper (opcional: se gerar fontes via openapi) -->
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>build-helper-maven-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>add-source</id>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>add-source</goal>
-						</goals>
-						<configuration>
-							<sources>
-								<source>${project.build.directory}/generated-sources/openapi/src/main/java</source>
-							</sources>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-
-			<!-- OpenAPI generator (opcional, mantive sua configuração) -->
-			<plugin>
-				<groupId>org.openapitools</groupId>
-				<artifactId>openapi-generator-maven-plugin</artifactId>
-				<version>7.10.0</version>
-				<executions>
-					<execution>
-						<id>openapi-generate</id>
-						<goals>
-							<goal>generate</goal>
-						</goals>
-						<configuration>
-							<inputSpec>${project.basedir}/src/main/resources/api/openapi.yaml</inputSpec>
-							<generatorName>spring</generatorName>
-							<apiPackage>com.fiap.fiap_tech_challenge.books.api</apiPackage>
-							<modelPackage>com.fiap.fiap_tech_challenge.books.model</modelPackage>
-							<modelNameSuffix>DTO</modelNameSuffix>
-							<configOptions>
-								<interfaceOnly>true</interfaceOnly>
-								<useJarkartaEe>true</useJarkartaEe>
-								<useSpringBoot>true</useSpringBoot>
-								<useTags>true</useTags>
-							</configOptions>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-
 		</plugins>
 
 	</build>
