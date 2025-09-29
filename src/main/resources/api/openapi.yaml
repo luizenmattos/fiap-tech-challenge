@@ -1,0 +1,312 @@
+openapi: 3.0.4
+info:
+  title: Grupo 13 - Tech Challenger 1° Fase - 1.0
+  description: |-
+    sistema robusto que permita a todos os
+    restaurantes gerenciar eficientemente suas operações, enquanto os clientes
+    poderão consultar informações, deixar avaliações e fazer pedidos online.
+    Devido à limitação de recursos financeiros, foi acordado que a entrega do
+    sistema será realizada em fases, garantindo que cada etapa seja desenvolvida
+    de forma cuidadosa e eficaz.
+  termsOfService: https://swagger.io/terms/
+  contact:
+    email: apiteam@swagger.io
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.12
+externalDocs:
+  description: Find out more about Swagger
+  url: https://swagger.io
+servers:
+  - url: https://petstore3.swagger.io/api/v3
+paths:
+  /users:
+    post:
+      tags:
+        - User
+      summary: Create user.
+      description: This can only be done by the logged in user.
+      operationId: createUser
+      requestBody:
+        description: Created user object
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserLogin'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    get:
+      tags:
+        - User
+      summary: Logs user into the system.
+      description: Log into the system.
+      operationId: loginUser
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+        '400':
+          description: Invalid username/password supplied
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /users/{id}:
+    delete:
+      tags:
+        - User
+      summary: Delete user resource.
+      description: This can only be done by the logged in user.
+      operationId: deleteUser
+      parameters:
+        - name: id
+          in: path
+          description: The name that needs to be deleted
+          required: true
+          schema:
+            type: number
+      responses:
+        '200':
+          description: User deleted
+        '400':
+          description: Invalid username supplied
+        '404':
+          description: User not found
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    put:
+      tags:
+        - User
+      summary: Creates list of users with given input array.
+      description: Creates list of users with given input array.
+      operationId: createUsersWithListInput
+      parameters:
+        - name: id
+          in: path
+          description: Id should be to change
+          required: true
+          schema:
+            type: number
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserLogin'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /users/{name}:
+    get:
+      tags:
+        - User
+      summary: Logs user into the system.
+      parameters:
+        - name: name
+          in: path
+          description: Id should be to change
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: Invalid username/password supplied
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /users/changepassword/{email}:
+    put:
+      tags:
+        - User
+      summary: Logs out current logged in user session.
+      description: Log user out of the system.
+      operationId: logoutUser
+      parameters:
+        - name: email
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/newPassword"
+
+      responses:
+        '200':
+          description: successful operation
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /users/login:
+    post:
+      tags:
+        - User
+      description: Log user out of the system.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/login"
+      responses:
+        '200':
+          description: successful operation
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                    example: 'Api-token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNjk0ODU2MDAwLCJleHAiOjE2OTQ4NTk2MDB9.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c'
+
+components:
+  schemas:
+    login:
+      type: object
+      properties:
+        login:
+          type: string
+          example: 'carlos123'
+        password:
+          type: string
+          example: '12345566'
+    newPassword:
+      type: object
+      properties:
+        newpassword:
+          type: string
+          example: John
+    adress:
+      type: object
+      properties:
+        street:
+          type: string
+          example: 'Rua do carmo'
+        city:
+          type: string
+          example: 'barueri'
+        state:
+          type: string
+          example: 'SP'
+        country:
+          type: string
+          example: 'Brasil'
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+        name:
+          type: string
+          example: John
+        email:
+          type: string
+          example: john@email.com
+        userlogin:
+          type: string
+          example: theUser
+        userType:
+          type: string
+          example: 'adm'
+        adress:
+          type: array
+          items:
+            $ref: '#/components/schemas/adress'
+    UserLogin:
+      type: object
+      properties:
+        name:
+          type: string
+          example: John
+        email:
+          type: string
+          example: john@email.com
+        login:
+          type: string
+          example: 'carlos1234'
+        password:
+          type: string
+          example: '12345'
+        userType:
+          type: string
+          example: 'adm'
+        adress:
+          type: array
+          items:
+            $ref: '#/components/schemas/adress'
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        datatime:
+          type: string
+          example: '2025-09-15 11:30:45'
+      required:
+        - code
+        - message
+  securitySchemes:
+    petstore_auth:
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: https://petstore3.swagger.io/oauth/authorize
+          scopes:
+            "write:pets": modify pets in your account
+            "read:pets": read your pets
+    api_key:
+      type: apiKey
+      name: api_key
+      in: header
