@@ -11,6 +11,7 @@ public class User {
     private String email;
     private Instant lastModifiedAt;
     private Address address;
+    private UserRole role;
 
     public User() {}
 
