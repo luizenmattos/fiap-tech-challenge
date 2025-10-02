@@ -35,3 +35,14 @@ build/
 mvnw
 mvnw.cmd
 
+### Logs ###
+*.log
+
+### H2 Database ###
+data/
+*.mv.db
+*.trace.db
+
+### OS files ###
+.DS_Store
+Thumbs.db
