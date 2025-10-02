@@ -7,22 +7,36 @@ services:
     ports:
       - "8080:8080"
     environment:
-      - SPRING_PROFILES_ACTIVE=prod  # Prod usa MySQL
+      - SPRING_PROFILES_ACTIVE=prod
     depends_on:
-      - mysql
+      postgres:
+        condition: service_healthy
+    healthcheck: # Healthcheck da aplicação (usa actuator/health)
+      test: ["CMD-SHELL", "wget -qO- http://localhost:8080/actuator/health | grep 'UP' || exit 1"]
+      interval: 15s
+      timeout: 10s
+      retries: 5
+      start_period: 20s
 
-  mysql:
-    image: mysql:8.1
-    container_name: mysql
+  postgres:
+    image: postgres:15
+    container_name: postgres
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: 1234
-      MYSQL_DATABASE: techchallenge
-    command: --default-authentication-plugin=mysql_native_password
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB: techchallenge
     ports:
-      - "3306:3306"
+      - "5432:5432"
     volumes:
-      - mysql-data:/var/lib/mysql
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
 
 volumes:
-  mysql-data:
+  postgres-data:
+
