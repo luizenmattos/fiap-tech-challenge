@@ -1,10 +1,10 @@
 package com.fiap.fiap_tech_challenge.infrastructure.adapters.inbound.web.controller;
 
 
-import com.fiap.fiap_tech_challenge.adapters.inbound.web.dto.AddressDTO;
-import com.fiap.fiap_tech_challenge.adapters.inbound.web.dto.UserCreateDTO;
-import com.fiap.fiap_tech_challenge.adapters.inbound.web.dto.UserResponseDTO;
-import com.fiap.fiap_tech_challenge.adapters.inbound.web.dto.UserUpdateDTO;
+import com.fiap.fiap_tech_challenge.infrastructure.adapters.inbound.web.dto.AddressDTO;
+import com.fiap.fiap_tech_challenge.infrastructure.adapters.inbound.web.dto.UserCreateDTO;
+import com.fiap.fiap_tech_challenge.infrastructure.adapters.inbound.web.dto.UserResponseDTO;
+import com.fiap.fiap_tech_challenge.infrastructure.adapters.inbound.web.dto.UserUpdateDTO;
 import com.fiap.fiap_tech_challenge.application.service.UserUseCase;
 import com.fiap.fiap_tech_challenge.application.domain.Address;
 import com.fiap.fiap_tech_challenge.application.domain.User;

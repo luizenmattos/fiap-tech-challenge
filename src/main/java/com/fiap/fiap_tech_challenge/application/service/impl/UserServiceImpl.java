@@ -1,8 +1,9 @@
 package com.fiap.fiap_tech_challenge.application.service.impl;
 
-import com.fiap.fiap_tech_challenge.application.port.outbound.UserRepositoryPort;
 import com.fiap.fiap_tech_challenge.application.service.UserUseCase;
 import com.fiap.fiap_tech_challenge.application.domain.User;
+import com.fiap.fiap_tech_challenge.application.port.outbound.UserRepositoryPort;
+
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
