@@ -1,4 +1,4 @@
-package com.fiap.fiap_tech_challenge.adapters.inbound.web.dto;
+package com.fiap.fiap_tech_challenge.infrastructure.adapters.inbound.web.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
