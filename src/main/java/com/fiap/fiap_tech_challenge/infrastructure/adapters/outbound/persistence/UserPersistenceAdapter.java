@@ -1,6 +1,6 @@
 package com.fiap.fiap_tech_challenge.infrastructure.adapters.outbound.persistence;
 
-import com.fiap.fiap_tech_challenge.infrastructure.adapters.outbound.persistence.repository.LoginJpaRepository;
+// import com.fiap.fiap_tech_challenge.infrastructure.adapters.outbound.persistence.repository.LoginJpaRepository;
 import com.fiap.fiap_tech_challenge.infrastructure.adapters.outbound.persistence.entity.AddressJpaEntity;
 import com.fiap.fiap_tech_challenge.infrastructure.adapters.outbound.persistence.entity.UserJpaEntity;
 import com.fiap.fiap_tech_challenge.infrastructure.adapters.outbound.persistence.repository.AddressJpaRepository;

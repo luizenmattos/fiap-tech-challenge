@@ -2,7 +2,6 @@ package com.fiap.fiap_tech_challenge.infrastructure.adapters.outbound.persistenc
 
 
 import lombok.Data;
-import lombok.Generated;
 
 import jakarta.persistence.*;
 
