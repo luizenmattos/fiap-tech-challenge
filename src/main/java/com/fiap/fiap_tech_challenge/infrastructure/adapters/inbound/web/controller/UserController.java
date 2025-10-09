@@ -1,6 +1,7 @@
 package com.fiap.fiap_tech_challenge.infrastructure.adapters.inbound.web.controller;
 
 
+import com.fiap.fiap_tech_challenge.books.api.UserApi;
 import com.fiap.fiap_tech_challenge.infrastructure.adapters.inbound.web.dto.AddressDTO;
 
 import com.fiap.fiap_tech_challenge.infrastructure.adapters.inbound.web.dto.UserCreateDTO;
@@ -27,7 +28,7 @@ import java.net.URI;
 
 @RestController
 @RequestMapping("/api/v1/users")
-public class UserController {
+public class UserController  {
 
     private final UserUseCase userUseCase;
     private final AuthenticationManager authenticationManager;
