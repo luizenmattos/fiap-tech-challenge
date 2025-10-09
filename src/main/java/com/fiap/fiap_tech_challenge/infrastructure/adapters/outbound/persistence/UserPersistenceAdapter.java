@@ -10,6 +10,7 @@ import com.fiap.fiap_tech_challenge.application.domain.Address;
 import com.fiap.fiap_tech_challenge.application.domain.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
@@ -45,8 +46,8 @@ public class UserPersistenceAdapter implements UserRepositoryPort {
     }
 
     @Override
-    public Optional<User> findByLogin(String login) {
-        return userJpaRepository.findByLogin(login).map(this::toDomain);
+    public UserDetails findByLogin(String login) {
+        return userJpaRepository.findByLogin(login); //.map(this::toDomain);
     }
 
     @Override
