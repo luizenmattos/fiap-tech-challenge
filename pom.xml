@@ -101,11 +101,6 @@
 			<scope>test</scope>
 		</dependency>
 
-<!--		<dependency>-->
-<!--			<groupId>com.mysql</groupId>-->
-<!--			<artifactId>mysql-connector-j</artifactId>-->
-<!--			<scope>runtime</scope>-->
-<!--		</dependency>-->
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
@@ -146,10 +141,10 @@
 					<encoding>UTF-8</encoding>
 				</configuration>
 			</plugin>
+
 			<!-- Compiler plugin: habilita annotation processing para Lombok -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-<!--				<artifactId>maven-resources-plugin</artifactId>-->
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.11.0</version>
 				<configuration>
@@ -170,6 +165,56 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+
+			<!-- Swagger generate code plugin -->
+			<plugin>
+				<groupId>io.swagger.codegen.v3</groupId>
+				<artifactId>swagger-codegen-maven-plugin</artifactId>
+				<version>3.0.73</version>
+				<executions>
+					<execution>
+						<id>products</id>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<inputSpec>${project.basedir}/src/main/resources/api/openapi.yaml</inputSpec>
+							<language>spring</language>
+							<output>${project.build.directory}/generated-sources/swagger</output>
+							<generateSupportingFiles>false</generateSupportingFiles>
+							<apiPackage>com.fiap.fiap_tech_challenge.api</apiPackage>
+							<modelPackage>com.fiap.fiap_tech_challenge.model</modelPackage>
+							<modelNameSuffix>DTO</modelNameSuffix>
+							<configOptions>
+								<interfaceOnly>true</interfaceOnly>
+								<jakarta>true</jakarta>
+								<java8>true</java8>
+							</configOptions>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>add-source</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>add-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>
+									${project.build.directory}/generated-sources/swagger/src/main/java
+								</source>
+							</sources>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 
 		</plugins>

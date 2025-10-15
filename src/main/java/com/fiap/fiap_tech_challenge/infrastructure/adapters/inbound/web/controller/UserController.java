@@ -1,18 +1,13 @@
 package com.fiap.fiap_tech_challenge.infrastructure.adapters.inbound.web.controller;
 
-
-import com.fiap.fiap_tech_challenge.books.api.UserApi;
 import com.fiap.fiap_tech_challenge.infrastructure.adapters.inbound.web.dto.AddressDTO;
-
 import com.fiap.fiap_tech_challenge.infrastructure.adapters.inbound.web.dto.UserCreateDTO;
-
 import com.fiap.fiap_tech_challenge.infrastructure.adapters.inbound.web.dto.UserResponseDTO;
 import com.fiap.fiap_tech_challenge.infrastructure.adapters.inbound.web.dto.UserUpdateDTO;
+import com.fiap.fiap_tech_challenge.model.LoginDTO;
 import com.fiap.fiap_tech_challenge.application.service.UserUseCase;
 import com.fiap.fiap_tech_challenge.application.domain.Address;
 import com.fiap.fiap_tech_challenge.application.domain.User;
-import com.fiap.fiap_tech_challenge.books.model.LoginDTO;
-import com.fiap.fiap_tech_challenge.infrastructure.adapters.inbound.web.dto.UserCreateDTO;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
