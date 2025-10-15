@@ -3,6 +3,8 @@ package com.fiap.fiap_tech_challenge.application.service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.inject.Named;
+
 import com.fiap.fiap_tech_challenge.application.domain.Person;
 import com.fiap.fiap_tech_challenge.application.domain.User;
 import com.fiap.fiap_tech_challenge.application.port.inbound.UserCreateInput;
@@ -14,6 +16,7 @@ import com.fiap.fiap_tech_challenge.application.port.inbound.UserUpdateOutput;
 import com.fiap.fiap_tech_challenge.application.port.outbound.PersonRepositoryPort;
 import com.fiap.fiap_tech_challenge.application.port.outbound.UserRepositoryPort;
 
+@Named
 public class UserService implements UserCrudPort {
 
     private UserRepositoryPort userRepository;
