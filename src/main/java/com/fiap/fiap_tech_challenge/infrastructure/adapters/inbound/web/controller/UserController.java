@@ -1,13 +1,16 @@
 package com.fiap.fiap_tech_challenge.infrastructure.adapters.inbound.web.controller;
 
-
 import com.fiap.fiap_tech_challenge.infrastructure.adapters.inbound.web.dto.AddressDTO;
 import com.fiap.fiap_tech_challenge.infrastructure.adapters.inbound.web.dto.UserCreateDTO;
 import com.fiap.fiap_tech_challenge.infrastructure.adapters.inbound.web.dto.UserResponseDTO;
 import com.fiap.fiap_tech_challenge.infrastructure.adapters.inbound.web.dto.UserUpdateDTO;
+import com.fiap.fiap_tech_challenge.model.LoginDTO;
 import com.fiap.fiap_tech_challenge.application.service.UserUseCase;
 import com.fiap.fiap_tech_challenge.application.domain.Address;
 import com.fiap.fiap_tech_challenge.application.domain.User;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.RequestBody;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
@@ -20,16 +23,24 @@ import java.net.URI;
 
 @RestController
 @RequestMapping("/api/v1/users")
-public class UserController {
+public class UserController  {
 
     private final UserUseCase userUseCase;
+    private final AuthenticationManager authenticationManager;
 
-    public UserController(UserUseCase userUseCase){
-
+    public UserController(UserUseCase userUseCase, AuthenticationManager authenticationManager) {
         this.userUseCase = userUseCase;
+        this.authenticationManager = authenticationManager;
     }
 
-
+    @PostMapping("/login")
+    public ResponseEntity<Void> login(@RequestBody LoginDTO loginRequest) {
+        Authentication authenticationRequest =
+                UsernamePasswordAuthenticationToken.unauthenticated(loginRequest.getLogin(), loginRequest.getPassword());
+        Authentication authenticationResponse =
+                this.authenticationManager.authenticate(authenticationRequest);
+        return ResponseEntity.ok().build();
+    }
 
     @PostMapping
     public ResponseEntity<UserResponseDTO> create(@Valid @RequestBody UserCreateDTO dto){
