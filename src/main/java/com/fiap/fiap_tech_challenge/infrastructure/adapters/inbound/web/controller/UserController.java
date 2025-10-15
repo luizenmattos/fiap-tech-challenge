@@ -8,6 +8,9 @@ import com.fiap.fiap_tech_challenge.model.LoginDTO;
 import com.fiap.fiap_tech_challenge.application.service.UserUseCase;
 import com.fiap.fiap_tech_challenge.application.domain.Address;
 import com.fiap.fiap_tech_challenge.application.domain.User;
+import com.fiap.fiap_tech_challenge.application.port.inbound.UserCreateOutput;
+import com.fiap.fiap_tech_challenge.application.port.inbound.UserCrudPort;
+
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -26,11 +29,13 @@ import java.net.URI;
 public class UserController  {
 
     private final UserUseCase userUseCase;
+    private final UserCrudPort userCrudPort;
     private final AuthenticationManager authenticationManager;
 
-    public UserController(UserUseCase userUseCase, AuthenticationManager authenticationManager) {
+    public UserController(UserUseCase userUseCase, AuthenticationManager authenticationManager, UserCrudPort userService) {
         this.userUseCase = userUseCase;
         this.authenticationManager = authenticationManager;
+        this.userCrudPort = userService;
     }
 
     @PostMapping("/login")
@@ -42,12 +47,11 @@ public class UserController  {
         return ResponseEntity.ok().build();
     }
 
+    //TODO: Mover mapeados para classe de mapeador????
     @PostMapping
     public ResponseEntity<UserResponseDTO> create(@Valid @RequestBody UserCreateDTO dto){
-        User domain = toDomain(dto);
-        User created = userUseCase.create(domain);
-        UserResponseDTO response = toResponse(created);
-        return ResponseEntity.created(URI.create("/api/v1/users/" + created.getId())).body(response);
+        UserCreateOutput user = userCrudPort.create(dto.toInput());
+        return ResponseEntity.ok().body(UserResponseDTO.fromOutput(user));
     }
 
     @GetMapping("/{id}")
@@ -114,7 +118,7 @@ public class UserController  {
     private UserResponseDTO toResponse(User u) {
         UserResponseDTO r = new UserResponseDTO();
         r.setId(u.getId());
-        r.setName(u.getName());
+        r.setFirstName(u.getName());
         r.setLogin(u.getLogin());
         r.setEmail(u.getEmail());
         r.setLastModifiedAt(u.getLastModifiedAt());

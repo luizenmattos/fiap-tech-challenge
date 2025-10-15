@@ -13,7 +13,13 @@ public class User {
     private Address address;
     private UserRole role;
 
-    public User() {}
+    public static User newInstance(String login, String password){
+        User user = new User();
+        user.login = login;
+        user.password = password;
+
+        return user;
+    }
 
     public Long getId() {
         return id;

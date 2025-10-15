@@ -1,0 +1,99 @@
+package com.fiap.fiap_tech_challenge.application.domain;
+
+import java.time.Instant;
+
+public class Person {
+    private Long id;
+    private Long userId;
+    private String firstName;
+    private String lastName;
+    private String phone;
+    private Instant createdAt;
+    private Instant updatedAt;
+    private Instant deletedAt;
+
+    
+    public static Person newInstance(Long userId, String firstName, String lastName, String phone){
+        Person person = new Person();
+        person.userId = userId;
+        person.firstName = firstName;
+        person.lastName = lastName;
+        person.phone = phone;
+        person.createdAt = Instant.now();
+        person.updatedAt = Instant.now();
+        
+        return person;
+    }
+
+    public void updatePersonalInfo(String firstName, String lastName, String phone){
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phone = phone;
+        this.updatedAt = Instant.now();
+    }
+
+    public void delete(){
+        this.deletedAt = Instant.now();
+    }
+
+    public Long getUserId(){
+        return this.userId;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public Instant getCreatedAt() {
+        return createdAt;
+    }
+
+    public Instant getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public Instant getDeletedAt() {
+        return deletedAt;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public void setCreatedAt(Instant createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public void setUpdatedAt(Instant updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public void setDeletedAt(Instant deletedAt) {
+        this.deletedAt = deletedAt;
+    }
+
+}

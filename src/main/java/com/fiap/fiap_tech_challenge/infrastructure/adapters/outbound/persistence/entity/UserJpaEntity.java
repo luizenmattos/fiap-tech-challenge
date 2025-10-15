@@ -21,19 +21,14 @@ public class UserJpaEntity implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false)
     private String login;
 
-    @Column(nullable = false)
     private String password;
 
-    @Column(nullable = false, unique = true)
     private String email;
 
-    @Column(name = "last_modified_at", nullable = false)
     private Instant lastModifiedAt;
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
