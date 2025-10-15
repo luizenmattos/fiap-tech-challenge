@@ -36,6 +36,10 @@ public class Person {
         this.deletedAt = Instant.now();
     }
 
+    public Long getUserId(){
+        return this.userId;
+    }
+
     public String getFirstName() {
         return firstName;
     }
