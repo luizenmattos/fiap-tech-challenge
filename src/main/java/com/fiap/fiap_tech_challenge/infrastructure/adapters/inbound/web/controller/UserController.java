@@ -9,9 +9,9 @@ import com.fiap.fiap_tech_challenge.application.port.inbound.UserCrudPort;
 import com.fiap.fiap_tech_challenge.application.port.inbound.UserReadOutput;
 import com.fiap.fiap_tech_challenge.application.port.inbound.UserUpdateOutput;
 
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
+// import org.springframework.security.authentication.AuthenticationManager;
+// import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+// import org.springframework.security.core.Authentication;
 
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -22,21 +22,21 @@ import org.springframework.web.bind.annotation.*;
 public class UserController  {
 
     private final UserCrudPort userCrudPort;
-    private final AuthenticationManager authenticationManager;
+    // private final AuthenticationManager authenticationManager;
 
-    public UserController(UserCrudPort userService, AuthenticationManager authenticationManager) {
-        this.authenticationManager = authenticationManager;
+    public UserController(UserCrudPort userService) {
+        // this.authenticationManager = authenticationManager;
         this.userCrudPort = userService;
     }
 
-    @PostMapping("/login")
-    public ResponseEntity<Void> login(@RequestBody LoginRequest loginRequest) {
-        Authentication authenticationRequest =
-                UsernamePasswordAuthenticationToken.unauthenticated(loginRequest.getLogin(), loginRequest.getPassword());
-        Authentication authenticationResponse =
-                this.authenticationManager.authenticate(authenticationRequest);
-        return ResponseEntity.ok().build();
-    }
+    // @PostMapping("/login")
+    // public ResponseEntity<Void> login(@RequestBody LoginRequest loginRequest) {
+    //     Authentication authenticationRequest =
+    //             UsernamePasswordAuthenticationToken.unauthenticated(loginRequest.getLogin(), loginRequest.getPassword());
+    //     Authentication authenticationResponse =
+    //             this.authenticationManager.authenticate(authenticationRequest);
+    //     return ResponseEntity.ok().build();
+    // }
 
     @PostMapping
     public ResponseEntity<UserResponse> create(@Valid @RequestBody UserCreateRequest dto){
