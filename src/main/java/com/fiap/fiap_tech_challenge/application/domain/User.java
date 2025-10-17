@@ -5,13 +5,12 @@ import java.time.Instant;
 public class User {
 
     private Long id;
-    private String name;
     private String login;
     private String password;
-    private String email;
-    private Instant lastModifiedAt;
-    private Address address;
     private UserRole role;
+    private Instant createdAt;
+    private Instant updatedAt;
+    private Instant deletedAt;
 
     public static User newInstance(String login, String password){
         User user = new User();
@@ -27,14 +26,6 @@ public class User {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getLogin() {
@@ -53,27 +44,36 @@ public class User {
         this.password = password;
     }
 
-    public String getEmail() {
-        return email;
+    public UserRole getRole() {
+        return role;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setRole(UserRole role) {
+        this.role = role;
     }
 
-    public Instant getLastModifiedAt() {
-        return lastModifiedAt;
+    public Instant getCreatedAt() {
+        return createdAt;
     }
 
-    public void setLastModifiedAt(Instant lastModifiedAt) {
-        this.lastModifiedAt = lastModifiedAt;
+    public void setCreatedAt(Instant createdAt) {
+        this.createdAt = createdAt;
     }
 
-    public Address getAddress() {
-        return address;
+    public Instant getUpdatedAt() {
+        return updatedAt;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
+    public void setUpdatedAt(Instant updatedAt) {
+        this.updatedAt = updatedAt;
     }
+
+    public Instant getDeletedAt() {
+        return deletedAt;
+    }
+
+    public void setDeletedAt(Instant deletedAt) {
+        this.deletedAt = deletedAt;
+    }
+
 }

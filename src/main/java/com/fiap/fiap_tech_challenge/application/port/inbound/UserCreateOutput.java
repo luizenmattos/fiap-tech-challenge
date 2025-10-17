@@ -1,5 +1,6 @@
 package com.fiap.fiap_tech_challenge.application.port.inbound;
 
+import com.fiap.fiap_tech_challenge.application.domain.Address;
 import com.fiap.fiap_tech_challenge.application.domain.Person;
 import com.fiap.fiap_tech_challenge.application.domain.User;
 
@@ -8,10 +9,30 @@ public record UserCreateOutput(
     String username,
     String firstName,
     String lastName,
-    String phone
+    String phone,
+    String countryCode,
+    String postalCode,
+    String state,
+    String city,
+    String street,
+    String number,
+    String complement
     ) {
 
-    public static UserCreateOutput newInstance(User user, Person person){
-        return new UserCreateOutput(user.getId(), user.getLogin(), person.getFirstName(), person.getLastName(), person.getPhone());
+    public static UserCreateOutput newInstance(User user, Person person, Address address){
+        return new UserCreateOutput(
+            user.getId(), 
+            user.getLogin(), 
+            person.getFirstName(), 
+            person.getLastName(), 
+            person.getPhone(),
+            address.getCountryCode(),
+            address.getPostalCode(),
+            address.getState(),
+            address.getCity(),
+            address.getStreet(),
+            address.getNumber(),
+            address.getComplement()
+            );
     }
 }

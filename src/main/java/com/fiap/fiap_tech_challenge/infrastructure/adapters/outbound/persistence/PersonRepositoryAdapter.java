@@ -7,6 +7,7 @@ import com.fiap.fiap_tech_challenge.application.domain.Person;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Component
@@ -22,13 +23,13 @@ public class PersonRepositoryAdapter implements PersonRepositoryPort {
     public Person save(Person person) {
         var entity = toEntity(person);
         var saved = personJpaRepository.save(entity);
-        return toDomain(saved);
+        return  toDomain(saved);
     }
 
     @Override
-    public Person findByUserId(Long userId) {
-        var entity = personJpaRepository.findByUserId(userId);
-        return entity != null ? toDomain(entity) : null;
+    public Optional<Person> findByUserId(Long userId) {
+        Optional<PersonJpaEntity> entity = personJpaRepository.findByUserId(userId);
+        return entity.map(this::toDomain);
     }
 
     @Override
