@@ -13,7 +13,6 @@ public class PersonJpaEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private Long userId;
     private String firstName;
     private String lastName;
@@ -22,8 +21,4 @@ public class PersonJpaEntity {
     private Instant createdAt;
     private Instant updatedAt;
     private Instant deletedAt;
-    public Object map(Object object) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'map'");
-    }
 }

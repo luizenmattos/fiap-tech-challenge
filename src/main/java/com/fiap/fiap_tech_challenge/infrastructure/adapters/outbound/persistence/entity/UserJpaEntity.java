@@ -9,8 +9,6 @@ import lombok.Data;
 // import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.Instant;
-import java.util.Collection;
-import java.util.List;
 
 @Data
 @Entity
@@ -20,23 +18,13 @@ public class UserJpaEntity /*implements UserDetails*/ {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    private String name;
-
     private String login;
-
     private String password;
+    private String role;
 
-    private String email;
-
-    private Instant lastModifiedAt;
-
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "address_id")
-    private AddressJpaEntity address;
-
-    private UserRole role;
-
+    private Instant createdAt;
+    private Instant updatedAt;
+    private Instant deletedAt;
 
     //Metodos do UserDetails
     // @Override

@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 import com.fiap.fiap_tech_challenge.application.domain.Address;
 import com.fiap.fiap_tech_challenge.application.port.outbound.AddressRepositoryPort;
 import com.fiap.fiap_tech_challenge.infrastructure.adapters.outbound.persistence.entity.AddressJpaEntity;
-import com.fiap.fiap_tech_challenge.infrastructure.adapters.outbound.persistence.entity.PersonJpaEntity;
 import com.fiap.fiap_tech_challenge.infrastructure.adapters.outbound.persistence.repository.AddressJpaRepository;
 
 @Component

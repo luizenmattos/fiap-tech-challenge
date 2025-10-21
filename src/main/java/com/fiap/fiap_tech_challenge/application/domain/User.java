@@ -16,6 +16,9 @@ public class User {
         User user = new User();
         user.login = login;
         user.password = password;
+        user.role = UserRole.USER;
+        user.createdAt = Instant.now();
+        user.updatedAt = Instant.now();
 
         return user;
     }

@@ -21,6 +21,7 @@ public class AddressJpaEntity {
     private String street;
     private String number;
     private String complement;
+
     private Instant createdAt;
     private Instant updatedAt;
     private Instant deletedAt;

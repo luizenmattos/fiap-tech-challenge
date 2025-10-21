@@ -13,19 +13,21 @@ public class Address {
     private String street;
     private String number;
     private String complement;
+
     private Instant createdAt;
     private Instant updatedAt;
     private Instant deletedAt;
     
     public static Address newInstance(Long userId, String countryCode,String postalCode,String state,String city,String street,String number,String complement){
         Address address = new Address();
+        address.userId = userId;
         address.countryCode = countryCode;
         address.postalCode = postalCode;
         address.state = state;
         address.city = city;
-        address.city = street;
-        address.city = number;
-        address.city = complement;
+        address.street = street;
+        address.number = number;
+        address.complement = complement;
         address.createdAt = Instant.now();
         address.updatedAt = Instant.now();
         

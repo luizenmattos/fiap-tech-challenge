@@ -4,6 +4,8 @@ import com.fiap.fiap_tech_challenge.infrastructure.adapters.outbound.persistence
 import com.fiap.fiap_tech_challenge.infrastructure.adapters.outbound.persistence.repository.UserJpaRepository;
 import com.fiap.fiap_tech_challenge.application.port.outbound.UserRepositoryPort;
 import com.fiap.fiap_tech_challenge.application.domain.User;
+import com.fiap.fiap_tech_challenge.application.domain.UserRole;
+
 // import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
@@ -48,6 +50,7 @@ public class UserReposotoryAdapter implements UserRepositoryPort {
         u.setId(e.getId());
         u.setLogin(e.getLogin());
         u.setPassword(e.getPassword());
+        u.setRole(UserRole.valueOf(e.getRole()));
 
         return u;
     }
@@ -58,6 +61,10 @@ public class UserReposotoryAdapter implements UserRepositoryPort {
         e.setId(u.getId());
         e.setLogin(u.getLogin());
         e.setPassword(u.getPassword());
+        e.setRole(u.getRole().name());
+        e.setCreatedAt(u.getCreatedAt());
+        e.setUpdatedAt(u.getUpdatedAt());
+        e.setDeletedAt(u.getDeletedAt());
 
         return e;
     }
