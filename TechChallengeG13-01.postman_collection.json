@@ -1,0 +1,113 @@
+{
+	"info": {
+		"_postman_id": "5bdbf698-1bad-4e9c-bb64-65c595c9029c",
+		"name": "TechChallengeG13-01",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "28803614"
+	},
+	"item": [
+		{
+			"name": "Create User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"name\": \"usuário 1\",\n\"login\": \"loginUsuario1\",\n\"password\": \"12345678\",\n\"email\": \"usuario1@email.com\",\n\"role\": \"ADMIN\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/api/v1/users"
+			},
+			"response": []
+		},
+		{
+			"name": "Create User (error - email ja cadastrado)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"name\": \"usuário 2\",\n\"login\": \"loginUsuario1\",\n\"password\": \"12345678\",\n\"email\": \"usuario1@email.com\",\n\"role\": \"ADMIN\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/api/v1/users"
+			},
+			"response": []
+		},
+		{
+			"name": "Create User (com address)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"name\": \"usuário 3\",\n\"login\": \"loginUsuario3\",\n\"password\": \"12345678\",\n\"email\": \"usuario3@email.com\",\n\"role\": \"ADMIN\",\n\"adress\": {\n    \"street\": \"rua 3\",\n    \"number\": \"13\",\n    \"city\": \"Sãp Paulo\",\n    \"cep\": \"12345000\"\n}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/api/v1/users"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Users",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8080/api/v1/users"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Users By id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8080/api/v1/users/2"
+			},
+			"response": []
+		},
+		{
+			"name": "Put User",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"name\": \"usuário modificado\",\n\"login\": \"loginUsuario1\",\n\"password\": \"12345678\",\n\"email\": \"usuario1@email.com\",\n\"role\": \"ADMIN\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/api/v1/users/1"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete User",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"name\": \"usuário modificado\",\n\"login\": \"loginUsuario2\",\n\"password\": \"12345678\",\n\"email\": \"usuario1@email.com\",\n\"role\": \"ADMIN\"\n}"
+				},
+				"url": "http://localhost:8080/api/v1/users/1"
+			},
+			"response": []
+		}
+	]
+}
