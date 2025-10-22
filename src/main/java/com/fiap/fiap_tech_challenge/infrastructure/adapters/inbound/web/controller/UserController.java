@@ -75,6 +75,19 @@ public class UserController  {
         return ResponseEntity.ok().body(usersResponse);
     }
 
+    @GetMapping("/findByName/{name}")
+    public ResponseEntity<List<UserResponse>> findByName(@PathVariable String name) {
+        System.out.println(name);
+        List<UserResponse> usersResponse = new ArrayList<>();
+
+        List<UserReadOutput> usersOutput = userCrudPort.findByName(name);
+        for(UserReadOutput user : usersOutput){
+            usersResponse.add(UserResponse.fromOutput(user));
+
+        }
+        return ResponseEntity.ok().body(usersResponse);
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<UserResponse> update(@PathVariable Long id, @Valid @RequestBody UserUpdateRequest dto) {
         UserUpdateOutput userOutput = userCrudPort.udpate(id, dto.toInput());

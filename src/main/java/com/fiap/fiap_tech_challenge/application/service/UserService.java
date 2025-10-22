@@ -74,6 +74,15 @@ public class UserService implements UserCrudPort {
     }
 
     @Override
+    public List<UserReadOutput> findByName(String name) {
+        return this.findAll().stream()
+            .filter(user -> 
+                name.equals(user.firstName()+ " " +user.lastName())
+            )
+            .toList();
+    }
+
+    @Override
     public UserUpdateOutput udpate(Long id, UserUpdateInput userInput) {
         User user = userRepository.findById(id).get();
         Person person = personRepository.findByUserId(id).get();

@@ -10,6 +10,8 @@ public interface UserCrudPort {
 
     List<UserReadOutput> findAll();
 
+    List<UserReadOutput> findByName(String name);
+
     UserUpdateOutput udpate (Long id, UserUpdateInput userInput);
 
     void deleteById (Long id);

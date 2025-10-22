@@ -1,9 +1,10 @@
 {
 	"info": {
-		"_postman_id": "5bdbf698-1bad-4e9c-bb64-65c595c9029c",
+		"_postman_id": "6000949c-5e0b-44ab-a39d-087d9e42452f",
 		"name": "TechChallengeG13-01",
-		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
-		"_exporter_id": "28803614"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31345798",
+		"_collection_link": "https://agriwin.postman.co/workspace/My-Workspace~07854931-9c7d-4448-8e7d-834e49f03a92/collection/31345798-6000949c-5e0b-44ab-a39d-087d9e42452f?action=share&source=collection_link&creator=31345798"
 	},
 	"item": [
 		{
@@ -13,14 +14,26 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\"name\": \"usuário 1\",\n\"login\": \"loginUsuario1\",\n\"password\": \"12345678\",\n\"email\": \"usuario1@email.com\",\n\"role\": \"ADMIN\"\n}",
+					"raw": "{\n    \"login\":\"luizen\",\n    \"password\":\"12345\",\n    \"firstName\":\"Luiz\",\n    \"lastName\":\"Mattos\",\n    \"phone\":\"42991646066\",\n    \"countryCode\":\"55\",\n    \"postalCode\":\"84010360\",\n    \"state\":\"Parana\",\n    \"city\":\"Ponta Grossa\",\n    \"street\":\"Santos Dumont\",\n    \"number\":\"370\",\n    \"complement\":\"AP 32\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
 						}
 					}
 				},
-				"url": "http://localhost:8080/api/v1/users"
+				"url": {
+					"raw": "http://localhost:8080/api/v1/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"users"
+					]
+				}
 			},
 			"response": []
 		},
@@ -38,7 +51,19 @@
 						}
 					}
 				},
-				"url": "http://localhost:8080/api/v1/users"
+				"url": {
+					"raw": "http://localhost:8080/api/v1/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"users"
+					]
+				}
 			},
 			"response": []
 		},
@@ -56,7 +81,19 @@
 						}
 					}
 				},
-				"url": "http://localhost:8080/api/v1/users"
+				"url": {
+					"raw": "http://localhost:8080/api/v1/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"users"
+					]
+				}
 			},
 			"response": []
 		},
@@ -65,7 +102,19 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": "http://localhost:8080/api/v1/users"
+				"url": {
+					"raw": "http://localhost:8080/api/v1/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"users"
+					]
+				}
 			},
 			"response": []
 		},
@@ -74,7 +123,43 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": "http://localhost:8080/api/v1/users/2"
+				"url": {
+					"raw": "http://localhost:8080/api/v1/users/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Users By Name",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/users/findByName/Luiz Mattos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"findByName",
+						"Luiz Mattos"
+					]
+				}
 			},
 			"response": []
 		},
@@ -85,14 +170,27 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\"name\": \"usuário modificado\",\n\"login\": \"loginUsuario1\",\n\"password\": \"12345678\",\n\"email\": \"usuario1@email.com\",\n\"role\": \"ADMIN\"\n}",
+					"raw": "{\n    \"firstName\": \"firstName updated\",\n    \"state\": \"state updated\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
 						}
 					}
 				},
-				"url": "http://localhost:8080/api/v1/users/1"
+				"url": {
+					"raw": "http://localhost:8080/api/v1/users/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"1"
+					]
+				}
 			},
 			"response": []
 		},
@@ -105,7 +203,20 @@
 					"mode": "raw",
 					"raw": "{\n\"name\": \"usuário modificado\",\n\"login\": \"loginUsuario2\",\n\"password\": \"12345678\",\n\"email\": \"usuario1@email.com\",\n\"role\": \"ADMIN\"\n}"
 				},
-				"url": "http://localhost:8080/api/v1/users/1"
+				"url": {
+					"raw": "http://localhost:8080/api/v1/users/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"1"
+					]
+				}
 			},
 			"response": []
 		}
