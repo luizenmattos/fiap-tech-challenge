@@ -1,0 +1,43 @@
+package com.fiap.fiap_tech_challenge.application.domain;
+
+import java.time.Instant;
+
+import lombok.Data;
+
+@Data
+public class Person {
+    private Long id;
+    private Long userId;
+    private String firstName;
+    private String lastName;
+    private String phone;
+    private Instant createdAt;
+    private Instant updatedAt;
+    private Instant deletedAt;
+
+    
+    public static Person newInstance(Long userId, String firstName, String lastName, String phone){
+        Person person = new Person();
+        person.userId = userId;
+        person.firstName = firstName;
+        person.lastName = lastName;
+        person.phone = phone;
+        person.createdAt = Instant.now();
+        person.updatedAt = Instant.now();
+        
+        return person;
+    }
+
+    public void updatePersonalInfo(String firstName, String lastName, String phone){
+        if (firstName != null) this.firstName = firstName;
+        if (lastName != null) this.lastName = lastName;
+        if (phone != null) this.phone = phone;
+
+        this.updatedAt = Instant.now();
+    }
+
+    public void delete(){
+        this.deletedAt = Instant.now();
+    }
+
+}

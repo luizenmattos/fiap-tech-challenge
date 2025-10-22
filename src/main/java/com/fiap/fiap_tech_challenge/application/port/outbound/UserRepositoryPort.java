@@ -1,19 +1,19 @@
 package com.fiap.fiap_tech_challenge.application.port.outbound;
 
 import com.fiap.fiap_tech_challenge.application.domain.User;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Optional;
+
+// import org.springframework.security.core.userdetails.UserDetails;
 
 public interface UserRepositoryPort {
 
     User save(User user);
-    Optional<User> findById(Long id);
-    Optional<User> findByEmail(String email);
-    UserDetails findByLogin(String login);
-    Page<User> findByNameContaining(String name, Pageable pageable);
+
     void deleteById(Long id);
-    boolean existsById(Long id);
+
+    Optional<User> findById(Long id);
+    
+    // UserDetails findByLogin(String login); //ESTA CERTO RETORNAR USER DETAILS???
 }
+

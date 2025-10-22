@@ -1,6 +1,6 @@
 package com.fiap.fiap_tech_challenge.infrastructure.adapters.outbound.persistence.repository;
 
-import com.fiap.fiap_tech_challenge.infrastructure.adapters.outbound.persistence.entity.AddressJpaEntity;
+import com.fiap.fiap_tech_challenge.infrastructure.adapters.outbound.persistence.entity.PersonJpaEntity;
 
 import java.util.Optional;
 
@@ -8,6 +8,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface AddressJpaRepository extends JpaRepository<AddressJpaEntity, Long> {
-    Optional<AddressJpaEntity> findByUserId(Long userId);
+public interface PersonJpaRepository extends JpaRepository<PersonJpaEntity, Long> {
+
+    Optional<PersonJpaEntity> findByUserId(Long userId);
+
 }

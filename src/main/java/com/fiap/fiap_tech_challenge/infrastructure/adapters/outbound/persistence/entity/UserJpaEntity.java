@@ -4,77 +4,56 @@ package com.fiap.fiap_tech_challenge.infrastructure.adapters.outbound.persistenc
 import com.fiap.fiap_tech_challenge.application.domain.UserRole;
 import jakarta.persistence.*;
 import lombok.Data;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+// import org.springframework.security.core.GrantedAuthority;
+// import org.springframework.security.core.authority.SimpleGrantedAuthority;
+// import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.Instant;
-import java.util.Collection;
-import java.util.List;
 
 @Data
 @Entity
 @Table(name = "users")
-public class UserJpaEntity implements UserDetails {
+public class UserJpaEntity /*implements UserDetails*/ {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(nullable = false)
-    private String name;
-
-    @Column(nullable = false)
     private String login;
-
-    @Column(nullable = false)
     private String password;
+    private String role;
 
-    @Column(nullable = false, unique = true)
-    private String email;
-
-    @Column(name = "last_modified_at", nullable = false)
-    private Instant lastModifiedAt;
-
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "address_id")
-    private AddressJpaEntity address;
-
-    private UserRole role;
-
+    private Instant createdAt;
+    private Instant updatedAt;
+    private Instant deletedAt;
 
     //Metodos do UserDetails
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        if(role == UserRole.ADMIN)
-            return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"),new SimpleGrantedAuthority("ROLE_USER"));
-        else
-            return List.of(new SimpleGrantedAuthority("ROLE_USER"));
-    }
+    // @Override
+    // public Collection<? extends GrantedAuthority> getAuthorities() {
+    //     if(role == UserRole.ADMIN)
+    //         return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"),new SimpleGrantedAuthority("ROLE_USER"));
+    //     else
+    //         return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+    // }
 
-    @Override
-    public String getUsername() {
-        return this.login;
-    }
 
-    @Override
-    public boolean isAccountNonExpired() {
-        return UserDetails.super.isAccountNonExpired();
-    }
+    // @Override
+    // public boolean isAccountNonExpired() {
+    //     return UserDetails.super.isAccountNonExpired();
+    // }
 
-    @Override
-    public boolean isAccountNonLocked() {
-        return UserDetails.super.isAccountNonLocked();
-    }
+    // @Override
+    // public boolean isAccountNonLocked() {
+    //     return UserDetails.super.isAccountNonLocked();
+    // }
 
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return UserDetails.super.isCredentialsNonExpired();
-    }
+    // @Override
+    // public boolean isCredentialsNonExpired() {
+    //     return UserDetails.super.isCredentialsNonExpired();
+    // }
 
-    @Override
-    public boolean isEnabled() {
-        return UserDetails.super.isEnabled();
-    }
+    // @Override
+    // public boolean isEnabled() {
+    //     return UserDetails.super.isEnabled();
+    // }
 
 }
