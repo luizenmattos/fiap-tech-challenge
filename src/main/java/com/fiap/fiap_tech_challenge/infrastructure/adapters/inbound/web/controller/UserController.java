@@ -14,6 +14,10 @@ import com.fiap.fiap_tech_challenge.application.port.inbound.UserUpdateOutput;
 // import org.springframework.security.core.Authentication;
 
 import jakarta.validation.Valid;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -58,6 +62,18 @@ public class UserController  {
     //     Page<UserResponseDTO> dtoPage = page.map(this::toResponse);
     //     return ResponseEntity.ok(dtoPage);
     // }
+
+    @GetMapping
+    public ResponseEntity<List<UserResponse>> findAll() {
+        List<UserResponse> usersResponse = new ArrayList<>();
+
+        List<UserReadOutput> usersOutput = userCrudPort.findAll();
+        for(UserReadOutput user : usersOutput){
+            usersResponse.add(UserResponse.fromOutput(user));
+
+        }
+        return ResponseEntity.ok().body(usersResponse);
+    }
 
     @PutMapping("/{id}")
     public ResponseEntity<UserResponse> update(@PathVariable Long id, @Valid @RequestBody UserUpdateRequest dto) {

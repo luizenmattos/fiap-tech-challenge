@@ -48,6 +48,7 @@ public class AdressRepositoryAdapter implements AddressRepositoryPort {
 
     AddressJpaEntity toEntity(Address address) {
         var entity = new AddressJpaEntity();
+        entity.setId(address.getId());
         entity.setUserId(address.getUserId());
         entity.setCountryCode(address.getCountryCode());
         entity.setPostalCode(address.getPostalCode());
@@ -64,6 +65,7 @@ public class AdressRepositoryAdapter implements AddressRepositoryPort {
 
     Address toDomain(AddressJpaEntity entity) {
         var address = new Address();
+        address.setId(entity.getId());
         address.setUserId(entity.getUserId());
         address.setCountryCode(entity.getCountryCode());
         address.setPostalCode(entity.getPostalCode());

@@ -2,17 +2,17 @@ package com.fiap.fiap_tech_challenge.infrastructure.adapters.inbound.web.dto;
 
 import lombok.Data;
 
-import java.time.Instant;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fiap.fiap_tech_challenge.application.port.inbound.UserCreateOutput;
 import com.fiap.fiap_tech_challenge.application.port.inbound.UserReadOutput;
 import com.fiap.fiap_tech_challenge.application.port.inbound.UserUpdateOutput;
 
-@Data
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@Data   
 public class UserResponse {
 
     private Long id;
-    private String username;
+    private String login;
     private String firstName;
     private String lastName;
     private String phone;
@@ -27,7 +27,7 @@ public class UserResponse {
     public static UserResponse fromOutput(UserCreateOutput output){
         var response = new UserResponse(); 
         response.setId(output.id());
-        response.setUsername(output.username());
+        response.setLogin(output.login());
         response.setFirstName(output.firstName());
         response.setLastName(output.lastName());
         response.setPhone(output.phone());

@@ -6,7 +6,7 @@ import com.fiap.fiap_tech_challenge.application.domain.User;
 
 public record UserCreateOutput(
     Long id,
-    String username,
+    String login,
     String firstName,
     String lastName,
     String phone,
@@ -19,7 +19,7 @@ public record UserCreateOutput(
     String complement
     ) {
 
-    public static UserCreateOutput newInstance(User user, Person person, Address address){
+    public static UserCreateOutput fromDomain(User user, Person person, Address address){
         return new UserCreateOutput(
             user.getId(), 
             user.getLogin(), 

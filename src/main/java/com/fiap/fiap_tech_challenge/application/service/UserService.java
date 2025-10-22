@@ -43,7 +43,7 @@ public class UserService implements UserCrudPort {
         Address address = Address.newInstance(user.getId(), userInput.countryCode(), userInput.postalCode(), userInput.state(), userInput.city(), userInput.street(), userInput.number(), userInput.complement());
         address = addressRepositoryPort.save(address);
                 
-        return UserCreateOutput.newInstance(user, person, address);
+        return UserCreateOutput.fromDomain(user, person, address);
     }
 
     @Override
@@ -82,6 +82,7 @@ public class UserService implements UserCrudPort {
         person.updatePersonalInfo(userInput.firstName(), userInput.lastName(), userInput.phone());
         person = personRepository.save(person);
 
+        address.updateAdress(userInput.countryCode(), userInput.postalCode(), userInput.state(), userInput.city(), userInput.street(), userInput.number(), userInput.complement());
         address = addressRepositoryPort.save(address);
 
         return UserUpdateOutput.newInstance(user, person, address);

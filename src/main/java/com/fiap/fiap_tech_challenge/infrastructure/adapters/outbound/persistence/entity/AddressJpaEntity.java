@@ -13,7 +13,9 @@ public class AddressJpaEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(unique = true)
     private Long userId;
+    
     private String countryCode;
     private String postalCode;
     private String state;

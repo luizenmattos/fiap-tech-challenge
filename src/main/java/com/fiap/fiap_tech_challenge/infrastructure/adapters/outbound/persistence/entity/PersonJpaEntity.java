@@ -13,7 +13,9 @@ public class PersonJpaEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(unique = true)
     private Long userId;
+
     private String firstName;
     private String lastName;
     private String phone;

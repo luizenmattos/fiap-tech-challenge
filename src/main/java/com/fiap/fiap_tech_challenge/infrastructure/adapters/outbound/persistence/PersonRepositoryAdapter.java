@@ -48,6 +48,7 @@ public class PersonRepositoryAdapter implements PersonRepositoryPort {
 
     PersonJpaEntity toEntity(Person person) {
         var entity = new PersonJpaEntity();
+        entity.setId(person.getId());
         entity.setUserId(person.getUserId());
         entity.setFirstName(person.getFirstName());
         entity.setLastName(person.getLastName());
