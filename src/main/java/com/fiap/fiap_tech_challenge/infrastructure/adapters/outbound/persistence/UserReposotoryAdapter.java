@@ -32,6 +32,12 @@ public class UserReposotoryAdapter implements UserRepositoryPort {
         return userJpaRepository.findById(id).map(this::toDomain);
     }
 
+    @Override
+    public User findByLogin(String login) {
+        UserJpaEntity jpa = userJpaRepository.findByLogin(login).get();
+        return toDomain(jpa);
+    }
+
     // @Override
     // public UserDetails findByLogin(String login) {
     //     return userJpaRepository.findByLogin(login).get(); 
