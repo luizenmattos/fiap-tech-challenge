@@ -14,5 +14,7 @@ public interface PersonRepositoryPort {
     Optional<Person> findByUserId(Long id);
 
     List<Person> findAll();
+
+    boolean existsByEmail(String email);
     
 }

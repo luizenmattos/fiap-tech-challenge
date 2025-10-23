@@ -12,4 +12,5 @@ public interface PersonJpaRepository extends JpaRepository<PersonJpaEntity, Long
 
     Optional<PersonJpaEntity> findByUserId(Long userId);
 
+    boolean existsByEmail(String email);
 }

@@ -21,8 +21,8 @@ public class UserCreateRequest {
     private String number;
     private String complement;
 
-    // @Email
-    // private String email;
+    @jakarta.validation.constraints.Email
+     private String email;
     
     public UserCreateInput toInput(){
         return new UserCreateInput(
@@ -31,6 +31,7 @@ public class UserCreateRequest {
             this.firstName,
             this.lastName,
             this.phone,
+            this.email,
             this.countryCode,
             this.postalCode,
             this.state,

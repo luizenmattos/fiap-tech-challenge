@@ -45,6 +45,10 @@ public class PersonRepositoryAdapter implements PersonRepositoryPort {
         personJpaRepository.deleteById(id);
     }
 
+//    @Override
+    public boolean existsByEmail(String email) {
+        return personJpaRepository.existsByEmail(email);
+    }
 
     PersonJpaEntity toEntity(Person person) {
         var entity = new PersonJpaEntity();
@@ -53,6 +57,7 @@ public class PersonRepositoryAdapter implements PersonRepositoryPort {
         entity.setFirstName(person.getFirstName());
         entity.setLastName(person.getLastName());
         entity.setPhone(person.getPhone());
+        entity.setEmail(person.getEmail());
         entity.setCreatedAt(person.getCreatedAt());
         entity.setUpdatedAt(person.getUpdatedAt());
         entity.setDeletedAt(person.getDeletedAt());
@@ -66,6 +71,7 @@ public class PersonRepositoryAdapter implements PersonRepositoryPort {
         person.setFirstName(entity.getFirstName());
         person.setLastName(entity.getLastName());
         person.setPhone(entity.getPhone());
+        person.setEmail(entity.getEmail());
         person.setCreatedAt(entity.getCreatedAt());
         person.setUpdatedAt(entity.getUpdatedAt());
         person.setDeletedAt(entity.getDeletedAt());
