@@ -8,6 +8,7 @@ import javax.inject.Named;
 import com.fiap.fiap_tech_challenge.application.domain.Address;
 import com.fiap.fiap_tech_challenge.application.domain.Person;
 import com.fiap.fiap_tech_challenge.application.domain.User;
+import com.fiap.fiap_tech_challenge.application.domain.exception.EmailAlreadyInUseException;
 import com.fiap.fiap_tech_challenge.application.port.inbound.UserCreateInput;
 import com.fiap.fiap_tech_challenge.application.port.inbound.UserCreateOutput;
 import com.fiap.fiap_tech_challenge.application.port.inbound.UserCrudPort;
@@ -33,11 +34,16 @@ public class UserService implements UserCrudPort {
 
     @Override
     public UserCreateOutput create(UserCreateInput userInput) {
+
+        if (personRepository.existsByEmail(userInput.email())){
+            throw new EmailAlreadyInUseException(userInput.email());
+        }
+
         //! COMO GARANTIR QUE AMBAS INSTÂNCIAS SEJAM SALVAS?
         User user = User.newInstance(userInput.login(), userInput.password());        
         user = userRepository.save(user);
 
-        Person person = Person.newInstance(user.getId(), userInput.firstName(), userInput.lastName(), userInput.phone());
+        Person person = Person.newInstance(user.getId(), userInput.firstName(), userInput.lastName(), userInput.phone(), userInput.email());
         person = personRepository.save(person);
 
         Address address = Address.newInstance(user.getId(), userInput.countryCode(), userInput.postalCode(), userInput.state(), userInput.city(), userInput.street(), userInput.number(), userInput.complement());

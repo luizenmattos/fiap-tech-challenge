@@ -11,17 +11,21 @@ public class Person {
     private String firstName;
     private String lastName;
     private String phone;
+
+    private String email;
+
     private Instant createdAt;
     private Instant updatedAt;
     private Instant deletedAt;
 
     
-    public static Person newInstance(Long userId, String firstName, String lastName, String phone){
+    public static Person newInstance(Long userId, String firstName, String lastName, String phone, String email){
         Person person = new Person();
         person.userId = userId;
         person.firstName = firstName;
         person.lastName = lastName;
         person.phone = phone;
+        person.email = email;
         person.createdAt = Instant.now();
         person.updatedAt = Instant.now();
         

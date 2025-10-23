@@ -20,6 +20,9 @@ public class PersonJpaEntity {
     private String lastName;
     private String phone;
 
+    @Column(name = "email", nullable = false, unique = true)
+    private String email;
+
     private Instant createdAt;
     private Instant updatedAt;
     private Instant deletedAt;
