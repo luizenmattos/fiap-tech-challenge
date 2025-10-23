@@ -33,14 +33,13 @@ public class UserController  {
         this.userCrudPort = userService;
     }
 
-    // @PostMapping("/login")
-    // public ResponseEntity<Void> login(@RequestBody LoginRequest loginRequest) {
-    //     Authentication authenticationRequest =
-    //             UsernamePasswordAuthenticationToken.unauthenticated(loginRequest.getLogin(), loginRequest.getPassword());
-    //     Authentication authenticationResponse =
-    //             this.authenticationManager.authenticate(authenticationRequest);
-    //     return ResponseEntity.ok().build();
-    // }
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@RequestBody LoginRequest loginRequest) {
+
+         return ResponseEntity.ok().body(
+            userCrudPort.login(loginRequest.getLogin(), loginRequest.getPassword())
+         );
+    }
 
     @PostMapping
     public ResponseEntity<UserResponse> create(@Valid @RequestBody UserCreateRequest dto){
@@ -64,10 +63,12 @@ public class UserController  {
     // }
 
     @GetMapping
-    public ResponseEntity<List<UserResponse>> findAll() {
+    public ResponseEntity<List<UserResponse>> findAll(
+            @RequestHeader(value = "Authorization", required = true) String token
+    ) {
         List<UserResponse> usersResponse = new ArrayList<>();
 
-        List<UserReadOutput> usersOutput = userCrudPort.findAll();
+        List<UserReadOutput> usersOutput = userCrudPort.findAll(token);
         for(UserReadOutput user : usersOutput){
             usersResponse.add(UserResponse.fromOutput(user));
 

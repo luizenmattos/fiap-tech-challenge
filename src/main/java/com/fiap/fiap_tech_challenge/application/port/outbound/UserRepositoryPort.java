@@ -13,7 +13,7 @@ public interface UserRepositoryPort {
     void deleteById(Long id);
 
     Optional<User> findById(Long id);
-    
-    // UserDetails findByLogin(String login); //ESTA CERTO RETORNAR USER DETAILS???
+
+    User findByLogin(String login); //ESTA CERTO RETORNAR USER DETAILS???
 }
 

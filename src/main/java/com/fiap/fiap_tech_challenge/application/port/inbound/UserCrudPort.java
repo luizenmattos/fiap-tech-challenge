@@ -8,12 +8,14 @@ public interface UserCrudPort {
 
     UserReadOutput findById(Long id);
 
-    List<UserReadOutput> findAll();
+    List<UserReadOutput> findAll(String token);
 
     List<UserReadOutput> findByName(String name);
 
     UserUpdateOutput udpate (Long id, UserUpdateInput userInput);
 
     void deleteById (Long id);
+
+    String login(String login, String password);
 
 }
