@@ -42,13 +42,18 @@ public class UserController  {
     }
 
     @PostMapping
-    public ResponseEntity<UserResponse> create(@Valid @RequestBody UserCreateRequest dto){
+    public ResponseEntity<UserResponse> create(
+            @RequestHeader(value = "Authorization", required = true) String token,
+            @Valid @RequestBody UserCreateRequest dto){
         UserCreateOutput user = userCrudPort.create(dto.toInput());
         return ResponseEntity.ok().body(UserResponse.fromOutput(user));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<UserResponse> getById(@PathVariable Long id) {
+    public ResponseEntity<UserResponse> getById(
+            @RequestHeader(value = "Authorization", required = true) String token,
+            @PathVariable Long id
+    ) {
         UserReadOutput user = userCrudPort.findById(id);
         return ResponseEntity.ok().body(UserResponse.fromOutput(user));
     }
@@ -77,7 +82,10 @@ public class UserController  {
     }
 
     @GetMapping("/findByName/{name}")
-    public ResponseEntity<List<UserResponse>> findByName(@PathVariable String name) {
+    public ResponseEntity<List<UserResponse>> findByName(
+            @RequestHeader(value = "Authorization", required = true) String token,
+            @PathVariable String name
+    ) {
         System.out.println(name);
         List<UserResponse> usersResponse = new ArrayList<>();
 
@@ -90,13 +98,20 @@ public class UserController  {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<UserResponse> update(@PathVariable Long id, @Valid @RequestBody UserUpdateRequest dto) {
+    public ResponseEntity<UserResponse> update(
+            @RequestHeader(value = "Authorization", required = true) String token,
+            @PathVariable Long id,
+            @Valid @RequestBody UserUpdateRequest dto
+    ) {
         UserUpdateOutput userOutput = userCrudPort.udpate(id, dto.toInput());
         return ResponseEntity.ok(UserResponse.fromOutput(userOutput));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
+    public ResponseEntity<Void> delete(
+            @RequestHeader(value = "Authorization", required = true) String token,
+            @PathVariable Long id
+    ) {
         userCrudPort.deleteById(id);
         return ResponseEntity.noContent().build();
     }
