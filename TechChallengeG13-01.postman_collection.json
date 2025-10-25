@@ -8,13 +8,44 @@
 	},
 	"item": [
 		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"login\":\"testuser\",\n    \"password\":\"Test@123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/users/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Create User",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"login\":\"luizen\",\n    \"password\":\"12345\",\n    \"firstName\":\"Luiz\",\n    \"lastName\":\"Mattos\",\n    \"phone\":\"42991646066\",\n    \"countryCode\":\"55\",\n    \"postalCode\":\"84010360\",\n    \"state\":\"Parana\",\n    \"city\":\"Ponta Grossa\",\n    \"street\":\"Santos Dumont\",\n    \"number\":\"370\",\n    \"complement\":\"AP 32\"\n}",
+					"raw": "{\n  \"login\": \"testuser\",\n  \"email\": \"test.user@example.com\",\n  \"password\": \"Test@123\",\n  \"firstName\": \"John\",\n  \"lastName\": \"Doe\",\n  \"phone\": \"11999999999\",\n  \"countryCode\": \"55\",\n  \"postalCode\": \"01001000\",\n  \"state\": \"Sao Paulo\",\n  \"city\": \"Sao Paulo\",\n  \"street\": \"Av Paulista\",\n  \"number\": \"1000\",\n  \"complement\": \"Apto 101\"\n}\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -44,37 +75,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\"name\": \"usuário 2\",\n\"login\": \"loginUsuario1\",\n\"password\": \"12345678\",\n\"email\": \"usuario1@email.com\",\n\"role\": \"ADMIN\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:8080/api/v1/users",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"v1",
-						"users"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Create User (com address)",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\"name\": \"usuário 3\",\n\"login\": \"loginUsuario3\",\n\"password\": \"12345678\",\n\"email\": \"usuario3@email.com\",\n\"role\": \"ADMIN\",\n\"adress\": {\n    \"street\": \"rua 3\",\n    \"number\": \"13\",\n    \"city\": \"Sãp Paulo\",\n    \"cep\": \"12345000\"\n}\n}",
+					"raw": "{\n  \"login\": \"testuser\",\n  \"email\": \"test.user@example.com\",\n  \"password\": \"Test@123\",\n  \"firstName\": \"John\",\n  \"lastName\": \"Doe\",\n  \"phone\": \"11999999999\",\n  \"countryCode\": \"55\",\n  \"postalCode\": \"01001000\",\n  \"state\": \"Sao Paulo\",\n  \"city\": \"Sao Paulo\",\n  \"street\": \"Av Paulista\",\n  \"number\": \"1000\",\n  \"complement\": \"Apto 101\"\n}\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -101,7 +102,13 @@
 			"name": "Get Users",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ7XCJpZFwiOjEsXCJsb2dpblwiOlwibHVpemVuXCIsXCJwYXNzd29yZFwiOlwiMTIzNDVcIixcInJvbGVcIjpcIlVTRVJcIixcImNyZWF0ZWRBdFwiOm51bGwsXCJ1cGRhdGVkQXRcIjpudWxsLFwiZGVsZXRlZEF0XCI6bnVsbH0iLCJpYXQiOjE3NjE0MTU4MDAsImV4cCI6MTc2MTUwMjIwMH0.P8N6A6PUCO87VXuWfX0Hla4FvQ4PeeXdBQTOBoa61k8",
+						"type": "text"
+					}
+				],
 				"url": {
 					"raw": "http://localhost:8080/api/v1/users",
 					"protocol": "http",
@@ -146,7 +153,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/api/v1/users/findByName/Luiz Mattos",
+					"raw": "http://localhost:8080/api/v1/users/findByName/John Doe",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -157,7 +164,7 @@
 						"v1",
 						"users",
 						"findByName",
-						"Luiz Mattos"
+						"John Doe"
 					]
 				}
 			},
@@ -170,7 +177,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"firstName\": \"firstName updated\",\n    \"state\": \"state updated\"\n}",
+					"raw": "{\n  \"email\": \"updated.user@example.com\",\n  \"firstName\": \"Jane\",\n  \"lastName\": \"Smith\",\n  \"phone\": \"11988888888\",\n  \"countryCode\": \"1\",\n  \"postalCode\": \"20040002\",\n  \"state\": \"Rio de Janeiro\",\n  \"city\": \"Rio de Janeiro\",\n  \"street\": \"Rua das Flores\",\n  \"number\": \"500\",\n  \"complement\": \"Casa B\"\n}\n",
 					"options": {
 						"raw": {
 							"language": "json"

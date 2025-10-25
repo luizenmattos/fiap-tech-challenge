@@ -2,8 +2,11 @@ package com.fiap.fiap_tech_challenge.application.port.inbound;
 
 import java.util.List;
 
-public interface UserCrudPort {
+import jakarta.transaction.Transactional;
 
+public interface UserCrudPort {
+    
+    @Transactional
     UserCreateOutput create (UserCreateInput userInput);
 
     UserReadOutput findById(Long id);
@@ -12,8 +15,10 @@ public interface UserCrudPort {
 
     List<UserReadOutput> findByName(String name);
 
+    @Transactional
     UserUpdateOutput udpate (Long id, UserUpdateInput userInput);
 
+    @Transactional
     void deleteById (Long id);
 
     String login(String login, String password);

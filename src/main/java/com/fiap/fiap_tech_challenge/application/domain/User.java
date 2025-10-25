@@ -26,4 +26,8 @@ public class User {
         return user;
     }
 
+    public void delete(){
+        this.deletedAt = Instant.now();
+    }
+
 }

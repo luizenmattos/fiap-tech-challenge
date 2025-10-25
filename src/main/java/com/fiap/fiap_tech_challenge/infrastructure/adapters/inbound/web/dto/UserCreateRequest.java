@@ -22,7 +22,7 @@ public class UserCreateRequest {
     private String complement;
 
     @jakarta.validation.constraints.Email
-     private String email;
+    private String email;
     
     public UserCreateInput toInput(){
         return new UserCreateInput(

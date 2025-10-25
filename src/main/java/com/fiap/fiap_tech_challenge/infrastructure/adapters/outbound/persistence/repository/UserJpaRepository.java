@@ -11,6 +11,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserJpaRepository extends JpaRepository<UserJpaEntity, Long> {
 
-    Optional<UserJpaEntity> findByLogin(String login);
+    Optional<UserJpaEntity> findByIdAndDeletedAtIsNull(Long id);
+
+    Optional<UserJpaEntity> findByLoginAndDeletedAtIsNull(String login);
 
 }

@@ -2,8 +2,12 @@ package com.fiap.fiap_tech_challenge.infrastructure.adapters.outbound.persistenc
 
 import com.fiap.fiap_tech_challenge.infrastructure.adapters.outbound.persistence.entity.PersonJpaEntity;
 import com.fiap.fiap_tech_challenge.infrastructure.adapters.outbound.persistence.repository.PersonJpaRepository;
+
+import lombok.extern.slf4j.Slf4j;
+
 import com.fiap.fiap_tech_challenge.application.port.outbound.PersonRepositoryPort;
 import com.fiap.fiap_tech_challenge.application.domain.Person;
+
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -11,6 +15,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Component
+@Slf4j
 public class PersonRepositoryAdapter implements PersonRepositoryPort {
 
     private final PersonJpaRepository personJpaRepository;
@@ -20,34 +25,30 @@ public class PersonRepositoryAdapter implements PersonRepositoryPort {
     }
 
     @Override
-    public Person save(Person person) {
+    public Optional<Person> save(Person person) {
         var entity = toEntity(person);
         var saved = personJpaRepository.save(entity);
-        return  toDomain(saved);
+        return  Optional.of(toDomain(saved));
     }
 
     @Override
     public Optional<Person> findByUserId(Long userId) {
-        Optional<PersonJpaEntity> entity = personJpaRepository.findByUserId(userId);
+        Optional<PersonJpaEntity> entity = personJpaRepository.findByUserIdAndDeletedAtIsNull(userId);
         return entity.map(this::toDomain);
     }
 
     @Override
     public List<Person> findAll() {
-        return personJpaRepository.findAll()
+        return personJpaRepository.findAllByDeletedAtIsNull()
                 .stream()
                 .map(this::toDomain)
                 .collect(Collectors.toList());
     }
 
-    @Override
-    public void deleteById(Long id) {
-        personJpaRepository.deleteById(id);
-    }
-
-//    @Override
+   @Override
     public boolean existsByEmail(String email) {
-        return personJpaRepository.existsByEmail(email);
+        log.info("Verificando existência do e-mail: {}", email);
+        return personJpaRepository.findByEmailAndDeletedAtIsNull(email).isPresent();
     }
 
     PersonJpaEntity toEntity(Person person) {

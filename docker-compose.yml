@@ -39,10 +39,10 @@ services:
 
   # Spring Boot App
   app:
-    image: fiap-tech-challenge-main-app
+    build: .
     container_name: fiap-tech-challenge
     ports:
-      - "8081:8080"  # Porta externa 8081 mapeada para 8080 do container
+      - "8080:8080"  # Porta externa 8081 mapeada para 8080 do container
     networks:
       - fiap-network
     depends_on:
