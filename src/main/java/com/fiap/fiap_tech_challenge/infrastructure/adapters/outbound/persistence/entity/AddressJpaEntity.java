@@ -8,12 +8,14 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "addresses")
+@Table(name = "address_table")
 public class AddressJpaEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(unique = true)
+
+    @Column(nullable = false, unique = true)
     private Long userId;
     
     private String countryCode;
@@ -24,6 +26,7 @@ public class AddressJpaEntity {
     private String number;
     private String complement;
 
+    @Column(nullable = false)
     private Instant createdAt;
     private Instant updatedAt;
     private Instant deletedAt;

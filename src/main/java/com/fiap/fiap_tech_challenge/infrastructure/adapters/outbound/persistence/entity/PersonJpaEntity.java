@@ -7,22 +7,24 @@ import java.time.Instant;
 
 @Data
 @Entity
-@Table(name = "people")
+@Table(name = "person_table")
 public class PersonJpaEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(unique = true)
+
+    @Column(nullable = false, unique = true)
     private Long userId;
+
+    @Column(nullable = false)
+    private String email;
 
     private String firstName;
     private String lastName;
     private String phone;
 
-    @Column(name = "email", nullable = false, unique = true)
-    private String email;
-
+    @Column(nullable = false)
     private Instant createdAt;
     private Instant updatedAt;
     private Instant deletedAt;

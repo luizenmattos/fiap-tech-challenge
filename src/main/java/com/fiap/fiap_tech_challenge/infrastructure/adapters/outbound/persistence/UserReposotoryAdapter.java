@@ -46,6 +46,9 @@ public class UserReposotoryAdapter implements UserRepositoryPort {
         u.setLogin(e.getLogin());
         u.setPassword(e.getPassword());
         u.setRole(UserRole.valueOf(e.getRole()));
+        u.setCreatedAt(e.getCreatedAt());
+        u.setUpdatedAt(e.getUpdatedAt());
+        u.setDeletedAt(e.getDeletedAt());
 
         return u;
     }
