@@ -17,7 +17,7 @@ public class PersonJpaEntity {
     @Column(nullable = false, unique = true)
     private Long userId;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String email;
 
     private String firstName;

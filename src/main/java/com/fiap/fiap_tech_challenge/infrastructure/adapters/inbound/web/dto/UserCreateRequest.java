@@ -13,6 +13,17 @@ public class UserCreateRequest {
     private String firstName;
     private String lastName;
     private String phone;
+
+    @jakarta.validation.constraints.Email
+    private String email;
+
+    @jakarta.validation.constraints.NotBlank
+    @jakarta.validation.constraints.Pattern(
+            regexp = "(?i)^(restaurant_owner|restaurante_owner|owner|admin|client|cliente|user|dono\\ de\\ restaurante)$",
+            message = "role deve ser 'restaurant_owner' ou 'client'"
+    )
+    private String role;
+
     private String countryCode;
     private String postalCode;
     private String state;
@@ -21,9 +32,7 @@ public class UserCreateRequest {
     private String number;
     private String complement;
 
-    @jakarta.validation.constraints.Email
-    private String email;
-    
+
     public UserCreateInput toInput(){
         return new UserCreateInput(
             this.login,
@@ -32,6 +41,7 @@ public class UserCreateRequest {
             this.lastName,
             this.phone,
             this.email,
+            this.role,
             this.countryCode,
             this.postalCode,
             this.state,

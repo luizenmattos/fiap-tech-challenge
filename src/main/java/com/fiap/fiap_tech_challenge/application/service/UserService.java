@@ -53,8 +53,8 @@ public class UserService implements UserCrudPort {
         if (personRepository.existsByEmail(userInput.email())){
             throw new DomainException("Email already exists: " + userInput.email());
         }
-
-        User user = User.newInstance(userInput.login(), userInput.password());        
+        UserRole role = UserRole.fromExternal(userInput.role());
+        User user = User.newInstance(userInput.login(), userInput.password(), role);
         user = userRepository.save(user)
             .orElseThrow(() -> new DataNotFoundException("User not found."));
 
