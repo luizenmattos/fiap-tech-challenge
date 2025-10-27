@@ -213,6 +213,35 @@
 			"response": []
 		},
 		{
+			"name": "Get Users By Name",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ7XCJpZFwiOjEsXCJsb2dpblwiOlwiY2hlZjAxXCIsXCJwYXNzd29yZFwiOlwiU2VuaGFGb3J0ZTEyMyFcIixcInJvbGVcIjpcIlVTRVJcIixcImNyZWF0ZWRBdFwiOjE3NjE1MTg5MDAuNTY3OTY4MDAwLFwidXBkYXRlZEF0XCI6MTc2MTUxODkwMC41Njc5OTAwMDAsXCJkZWxldGVkQXRcIjpudWxsfSIsImlhdCI6MTc2MTUxOTE4NCwiZXhwIjoxNzYxNjA1NTg0fQ.IdL2umR_sSclk6lC8jRLbVcUdlZKXpuaOnB-aj5vOa4",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/users/findByName/dona",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"findByName",
+						"dona"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Put User",
 			"request": {
 				"method": "PUT",
