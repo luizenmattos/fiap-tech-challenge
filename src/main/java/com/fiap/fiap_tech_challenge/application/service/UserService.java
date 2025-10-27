@@ -53,7 +53,9 @@ public class UserService implements UserCrudPort {
         if (personRepository.existsByEmail(userInput.email())){
             throw new DomainException("Email already exists: " + userInput.email());
         }
+
         UserRole role = UserRole.fromExternal(userInput.role());
+
         User user = User.newInstance(userInput.login(), userInput.password(), role);
         user = userRepository.save(user)
             .orElseThrow(() -> new DataNotFoundException("User not found."));
@@ -62,9 +64,13 @@ public class UserService implements UserCrudPort {
         person = personRepository.save(person)
             .orElseThrow(() -> new DataNotFoundException("User not found."));
 
-        Address address = Address.newInstance(user.getId(), userInput.countryCode(), userInput.postalCode(), userInput.state(), userInput.city(), userInput.street(), userInput.number(), userInput.complement());
+        var address = Address.newInstance(
+                user.getId(),
+                userInput.countryCode(), userInput.postalCode(), userInput.state(),
+                userInput.city(), userInput.street(), userInput.number(), userInput.complement()
+        );
         address = addressRepositoryPort.save(address)
-            .orElseThrow(() -> new DataNotFoundException("User not found."));
+                .orElseThrow(() -> new DataNotFoundException("User not found."));
                 
         return UserCreateOutput.fromDomain(user, person, address);
     }

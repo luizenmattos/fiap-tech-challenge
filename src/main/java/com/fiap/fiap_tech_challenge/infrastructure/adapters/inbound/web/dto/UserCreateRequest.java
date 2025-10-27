@@ -1,15 +1,19 @@
 package com.fiap.fiap_tech_challenge.infrastructure.adapters.inbound.web.dto;
 
 import com.fiap.fiap_tech_challenge.application.port.inbound.UserCreateInput;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 @Data
 public class UserCreateRequest {
 
-
+    @NotBlank
     private String login;
+    @NotBlank
     private String password;
+    @NotBlank
     private String firstName;
     private String lastName;
     private String phone;
@@ -25,10 +29,17 @@ public class UserCreateRequest {
     private String role;
 
     private String countryCode;
+
+    @NotBlank(message = "CEP é obrigatório")
+    @Pattern(regexp="^\\d{5}-?\\d{3}$", message="CEP no formato 00000-000 ou 00000000")
     private String postalCode;
+    @NotBlank(message = "estado é obrigatório")
     private String state;
+    @NotBlank(message = "cidade é obrigatório")
     private String city;
+    @NotBlank(message = "rua é obrigatório")
     private String street;
+    @NotBlank(message = "número é obrigatório")
     private String number;
     private String complement;
 
