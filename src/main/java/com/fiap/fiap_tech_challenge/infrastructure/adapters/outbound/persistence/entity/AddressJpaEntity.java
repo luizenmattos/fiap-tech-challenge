@@ -19,10 +19,15 @@ public class AddressJpaEntity {
     private Long userId;
     
     private String countryCode;
+    @Column(nullable = false)
     private String postalCode;
+    @Column(nullable = false)
     private String state;
+    @Column(nullable = false)
     private String city;
+    @Column(nullable = false)
     private String street;
+    @Column(nullable = false)
     private String number;
     private String complement;
 
