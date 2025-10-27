@@ -38,6 +38,14 @@ public class PersonRepositoryAdapter implements PersonRepositoryPort {
     }
 
     @Override
+    public List<Person> searchByName(String name) {
+        return personJpaRepository.searchByName(name)
+                .stream()
+                .map(this::toDomain)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public List<Person> findAll() {
         return personJpaRepository.findAllByDeletedAtIsNull()
                 .stream()
