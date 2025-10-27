@@ -118,13 +118,16 @@ public class UserService implements UserCrudPort {
     @Override
     public List<UserReadOutput> findByName(String name) {
         log.info("Getting user by name...");
-        return null;
 
-           /*     this.findAll().stream()
-            .filter(user -> 
-                name.equals(user.firstName()+ " " +user.lastName())
-            )
-            .toList();*/
+        List<Person> people = personRepository.searchByName(name);
+
+        List<UserReadOutput> result = new ArrayList<>(people.size());
+
+        for (Person person : people){
+            var addressOpt = addressRepositoryPort.findByUserId(person.getUserId());
+            result.add(UserReadOutput.newInstance(person.getUserId(), person, addressOpt.orElse(null)));
+        }
+        return result;
     }
 
     @Override
