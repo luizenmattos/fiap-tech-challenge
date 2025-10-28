@@ -21,31 +21,20 @@ public class UserReposotoryAdapter implements UserRepositoryPort {
     }
 
     @Override
-    public User save(User user) {
+    public Optional<User> save(User user) {
         UserJpaEntity entity = toEntity(user);
         UserJpaEntity saved = userJpaRepository.save(entity);
-        return toDomain(saved);
+        return Optional.of(toDomain(saved));
     }
 
     @Override
     public Optional<User> findById(Long id) {
-        return userJpaRepository.findById(id).map(this::toDomain);
+        return userJpaRepository.findByIdAndDeletedAtIsNull(id).map(this::toDomain);
     }
 
     @Override
-    public User findByLogin(String login) {
-        UserJpaEntity jpa = userJpaRepository.findByLogin(login).get();
-        return toDomain(jpa);
-    }
-
-    // @Override
-    // public UserDetails findByLogin(String login) {
-    //     return userJpaRepository.findByLogin(login).get(); 
-    // }
-
-    @Override
-    public void deleteById(Long id) {
-        userJpaRepository.deleteById(id);
+    public Optional<User> findByLogin(String login) {
+        return userJpaRepository.findByLoginAndDeletedAtIsNull(login).map(this::toDomain);
     }
 
     // mappers simples
@@ -57,6 +46,9 @@ public class UserReposotoryAdapter implements UserRepositoryPort {
         u.setLogin(e.getLogin());
         u.setPassword(e.getPassword());
         u.setRole(UserRole.valueOf(e.getRole()));
+        u.setCreatedAt(e.getCreatedAt());
+        u.setUpdatedAt(e.getUpdatedAt());
+        u.setDeletedAt(e.getDeletedAt());
 
         return u;
     }

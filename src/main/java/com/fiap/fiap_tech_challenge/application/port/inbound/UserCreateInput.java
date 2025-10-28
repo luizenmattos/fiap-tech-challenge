@@ -7,6 +7,7 @@ public record UserCreateInput(
     String lastName,
     String phone,
     String email,
+    String role,
     String countryCode,
     String postalCode,
     String state,

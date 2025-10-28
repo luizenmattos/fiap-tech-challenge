@@ -22,7 +22,7 @@ public class JwtUtil {
     public String generateToken(User user) throws JsonProcessingException {
         Date now = new Date();
         Date exp = new Date(now.getTime() + validityMillis);
-        ObjectMapper mapper = new ObjectMapper();
+        ObjectMapper mapper = new ObjectMapper().findAndRegisterModules();
 
         // Converte o objeto em JSON String
         String jsonString = mapper.writeValueAsString(user);
@@ -42,7 +42,7 @@ public class JwtUtil {
                     .build()
                     .parseClaimsJws(token);
 
-            ObjectMapper mapper = new ObjectMapper();
+            ObjectMapper mapper = new ObjectMapper().findAndRegisterModules();
 
             System.out.println(parsed.getBody().getSubject());
             return mapper.readValue(parsed.getBody().getSubject(), User.class);

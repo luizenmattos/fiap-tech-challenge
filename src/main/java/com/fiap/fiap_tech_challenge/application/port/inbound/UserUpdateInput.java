@@ -4,6 +4,7 @@ public record UserUpdateInput(
     String firstName,
     String lastName,
     String phone,
+    String email,
     String countryCode,
     String postalCode,
     String state,
