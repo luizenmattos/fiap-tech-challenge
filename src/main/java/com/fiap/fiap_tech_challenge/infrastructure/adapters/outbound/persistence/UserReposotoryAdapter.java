@@ -37,6 +37,11 @@ public class UserReposotoryAdapter implements UserRepositoryPort {
         return userJpaRepository.findByLoginAndDeletedAtIsNull(login).map(this::toDomain);
     }
 
+    @Override
+    public void changePassword(Long id, String pass) {
+        userJpaRepository.changePassword(id,pass);
+    }
+
     // mappers simples
     private User toDomain(UserJpaEntity e) {
         if (e == null) return null;

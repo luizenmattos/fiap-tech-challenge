@@ -1,9 +1,6 @@
 package com.fiap.fiap_tech_challenge.infrastructure.adapters.inbound.web.controller;
 
-import com.fiap.fiap_tech_challenge.infrastructure.adapters.inbound.web.dto.LoginRequest;
-import com.fiap.fiap_tech_challenge.infrastructure.adapters.inbound.web.dto.UserCreateRequest;
-import com.fiap.fiap_tech_challenge.infrastructure.adapters.inbound.web.dto.UserResponse;
-import com.fiap.fiap_tech_challenge.infrastructure.adapters.inbound.web.dto.UserUpdateRequest;
+import com.fiap.fiap_tech_challenge.infrastructure.adapters.inbound.web.dto.*;
 import com.fiap.fiap_tech_challenge.application.port.inbound.UserCreateOutput;
 import com.fiap.fiap_tech_challenge.application.port.inbound.UserCrudPort;
 import com.fiap.fiap_tech_challenge.application.port.inbound.UserReadOutput;
@@ -45,7 +42,7 @@ public class UserController  {
     public ResponseEntity<UserResponse> create(
             @RequestHeader(value = "Authorization", required = true) String token,
             @Valid @RequestBody UserCreateRequest dto){
-        UserCreateOutput user = userCrudPort.create(dto.toInput());
+        UserCreateOutput user = userCrudPort.create(token,dto.toInput());
         return ResponseEntity.ok().body(UserResponse.fromOutput(user));
     }
 
@@ -54,18 +51,9 @@ public class UserController  {
             @RequestHeader(value = "Authorization", required = true) String token,
             @PathVariable Long id
     ) {
-        UserReadOutput user = userCrudPort.findById(id);
+        UserReadOutput user = userCrudPort.findById(token,id);
         return ResponseEntity.ok().body(UserResponse.fromOutput(user));
     }
-
-    // @GetMapping
-    // public ResponseEntity<Page<UserResponseDTO>> searchByName(
-    //         @RequestParam(required = false, defaultValue = "") String name,
-    //         @PageableDefault(size = 10) Pageable pageable) {
-    //     Page<User> page = userUseCase.searchByName(name, pageable);
-    //     Page<UserResponseDTO> dtoPage = page.map(this::toResponse);
-    //     return ResponseEntity.ok(dtoPage);
-    // }
 
     @GetMapping
     public ResponseEntity<List<UserResponse>> findAll(
@@ -89,7 +77,7 @@ public class UserController  {
         System.out.println(name);
         List<UserResponse> usersResponse = new ArrayList<>();
 
-        List<UserReadOutput> usersOutput = userCrudPort.findByName(name);
+        List<UserReadOutput> usersOutput = userCrudPort.findByName(token,name);
         for(UserReadOutput user : usersOutput){
             usersResponse.add(UserResponse.fromOutput(user));
 
@@ -103,16 +91,26 @@ public class UserController  {
             @PathVariable Long id,
             @Valid @RequestBody UserUpdateRequest dto
     ) {
-        UserUpdateOutput userOutput = userCrudPort.udpate(id, dto.toInput());
+        UserUpdateOutput userOutput = userCrudPort.udpate(token,id, dto.toInput());
         return ResponseEntity.ok(UserResponse.fromOutput(userOutput));
     }
+
+    @PutMapping("/new-password")
+    public ResponseEntity<UserResponse> changePassword(
+            @RequestHeader(value = "Authorization", required = true) String token,
+            @Valid @RequestBody UserUpdatePassword dto
+    ) {
+        userCrudPort.changePassword(token, dto.toInput());
+        return ResponseEntity.noContent().build();
+    }
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(
             @RequestHeader(value = "Authorization", required = true) String token,
             @PathVariable Long id
     ) {
-        userCrudPort.deleteById(id);
+        userCrudPort.deleteById(token,id);
         return ResponseEntity.noContent().build();
     }
 

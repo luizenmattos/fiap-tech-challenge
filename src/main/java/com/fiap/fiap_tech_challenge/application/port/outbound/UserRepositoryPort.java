@@ -11,5 +11,7 @@ public interface UserRepositoryPort {
     Optional<User> findById(Long id);
 
     Optional<User> findByLogin(String login);
+
+    void changePassword(Long id,String pass);
 }
 

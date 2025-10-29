@@ -7,20 +7,22 @@ import jakarta.transaction.Transactional;
 public interface UserCrudPort {
     
     @Transactional
-    UserCreateOutput create (UserCreateInput userInput);
+    UserCreateOutput create (String token,UserCreateInput userInput);
 
-    UserReadOutput findById(Long id);
+    UserReadOutput findById(String token, Long id);
 
     List<UserReadOutput> findAll(String token);
 
-    List<UserReadOutput> findByName(String name);
+    List<UserReadOutput> findByName(String token,String name);
 
     @Transactional
-    UserUpdateOutput udpate (Long id, UserUpdateInput userInput);
+    UserUpdateOutput udpate (String token,Long id, UserUpdateInput userInput);
 
     @Transactional
-    void deleteById (Long id);
+    void deleteById (String token,Long id);
 
     String login(String login, String password);
+
+    void changePassword(String token, UserUpdatePasswordInput password);
 
 }
