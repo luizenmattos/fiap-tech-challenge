@@ -1,16 +1,22 @@
 {
 	"info": {
-		"_postman_id": "5bdbf698-1bad-4e9c-bb64-65c595c9029c",
+		"_postman_id": "f7473ffb-c526-4304-9e29-dbd1c4ef8263",
 		"name": "TechChallengeG13-01",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "28803614"
+		"_exporter_id": "4094701"
 	},
 	"item": [
 		{
 			"name": "Create User / dono",
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
 					"raw": "{\n  \"login\": \"chef01\",\n  \"password\": \"SenhaForte123!\",\n  \"firstName\": \"Dona\",\n  \"lastName\": \"Maria\",\n  \"email\": \"chef@restaurante.com\",\n  \"role\": \"dono de restaurante\",\n\n  \"postalCode\": \"01001-000\",\n  \"state\": \"SP\",\n  \"city\": \"São Paulo\",\n  \"street\": \"Praça da Sé\",\n  \"number\": \"100\",\n  \"complement\": \"Sala 5\"\n}",
@@ -40,7 +46,13 @@
 			"name": "Create User / cliente",
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
 					"raw": "{\n  \"login\": \"usuario01\",\n  \"password\": \"SenhaForte123!\",\n  \"firstName\": \"Seu\",\n  \"lastName\": \"Zé\",\n  \"email\": \"seu@ze.com\",\n  \"role\": \"cliente\",\n\n  \"postalCode\": \"01001-000\",\n  \"state\": \"SP\",\n  \"city\": \"São Paulo\",\n  \"street\": \"Praça da Só\",\n  \"number\": \"101\"\n}",
@@ -70,7 +82,13 @@
 			"name": "Create User / erro email",
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
 					"raw": "{\n  \"login\": \"usuario02\",\n  \"password\": \"SenhaForte123!\",\n  \"firstName\": \"Seu\",\n  \"lastName\": \"Zé\",\n  \"email\": \"seu@ze.com\",\n  \"role\": \"cliente\",\n\n  \"postalCode\": \"01001-000\",\n  \"state\": \"SP\",\n  \"city\": \"São Paulo\",\n  \"street\": \"Praça da Só\",\n  \"number\": \"101\"\n}",
@@ -100,7 +118,13 @@
 			"name": "Create User / erro sem endereço",
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
 					"raw": "{\n  \"login\": \"usuario02\",\n  \"password\": \"SenhaForte123!\",\n  \"firstName\": \"João\",\n  \"lastName\": \"Banana\",\n  \"email\": \"joao@banana.com\",\n  \"role\": \"cliente\"\n}",
@@ -133,7 +157,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"login\": \"chef01\",\n  \"password\": \"SenhaForte123!\"\n}",
+					"raw": "{\n  \"login\": \"root\",\n  \"password\": \"root\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -164,7 +188,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ7XCJpZFwiOjEsXCJsb2dpblwiOlwiY2hlZjAxXCIsXCJwYXNzd29yZFwiOlwiU2VuaGFGb3J0ZTEyMyFcIixcInJvbGVcIjpcIlVTRVJcIixcImNyZWF0ZWRBdFwiOjE3NjE2MDYzODIuNDY0NTQwMDAwLFwidXBkYXRlZEF0XCI6MTc2MTYwNjM4Mi40NjQ1NDgwMDAsXCJkZWxldGVkQXRcIjpudWxsfSIsImlhdCI6MTc2MTYwNjQzNCwiZXhwIjoxNzYxNjkyODM0fQ.lavd2AHODB_QSHSjXSP3dCv9vvYbXunwql3xUHPj8rY",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ7XCJpZFwiOjEsXCJsb2dpblwiOlwicm9vdFwiLFwicGFzc3dvcmRcIjpcInJvb3RcIixcInJvbGVcIjpcIkFETUlOXCIsXCJjcmVhdGVkQXRcIjoxNzYxNjk2MTA5LjI4NDI3OTAwMCxcInVwZGF0ZWRBdFwiOm51bGwsXCJkZWxldGVkQXRcIjpudWxsfSIsImlhdCI6MTc2MTY5NjE0OSwiZXhwIjoxNzYxNzAzMzQ5fQ.iXA4ZbbVaONOwgpeFbFSR8fihjriNBEu8-fIMsjJ2Hc",
 						"type": "text"
 					}
 				],
@@ -245,7 +269,13 @@
 			"name": "Put User",
 			"request": {
 				"method": "PUT",
-				"header": [],
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
 					"raw": "{\n  \"login\": \"usuario01 - modificado\",\n  \"password\": \"SenhaForte123!\",\n  \"firstName\": \"Seu\",\n  \"lastName\": \"Zé\",\n  \"email\": \"seu2@ze.com\",\n  \"role\": \"cliente\",\n\n  \"postalCode\": \"01001-000\",\n  \"state\": \"SP\",\n  \"city\": \"São Paulo\",\n  \"street\": \"Praça da Só\",\n  \"number\": \"101\"\n}",
@@ -276,7 +306,13 @@
 			"name": "Delete User",
 			"request": {
 				"method": "DELETE",
-				"header": [],
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
 					"raw": ""

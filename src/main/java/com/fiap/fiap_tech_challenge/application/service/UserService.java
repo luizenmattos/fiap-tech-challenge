@@ -14,12 +14,7 @@ import com.fiap.fiap_tech_challenge.application.domain.UserRole;
 import com.fiap.fiap_tech_challenge.application.domain.exception.DataNotFoundException;
 import com.fiap.fiap_tech_challenge.application.domain.exception.DomainException;
 import com.fiap.fiap_tech_challenge.application.domain.exception.NotFindUserException;
-import com.fiap.fiap_tech_challenge.application.port.inbound.UserCreateInput;
-import com.fiap.fiap_tech_challenge.application.port.inbound.UserCreateOutput;
-import com.fiap.fiap_tech_challenge.application.port.inbound.UserCrudPort;
-import com.fiap.fiap_tech_challenge.application.port.inbound.UserReadOutput;
-import com.fiap.fiap_tech_challenge.application.port.inbound.UserUpdateInput;
-import com.fiap.fiap_tech_challenge.application.port.inbound.UserUpdateOutput;
+import com.fiap.fiap_tech_challenge.application.port.inbound.*;
 import com.fiap.fiap_tech_challenge.application.port.outbound.AddressRepositoryPort;
 import com.fiap.fiap_tech_challenge.application.port.outbound.PersonRepositoryPort;
 import com.fiap.fiap_tech_challenge.application.port.outbound.UserRepositoryPort;
@@ -47,43 +42,63 @@ public class UserService implements UserCrudPort {
     }
 
     @Override
-    public UserCreateOutput create(UserCreateInput userInput) {
-        log.info("Creating user...");
+    public UserCreateOutput create(String token,UserCreateInput userInput) {
+        User u = jwtUtil.validateAndGetUsername(token);
 
-        if (personRepository.existsByEmail(userInput.email())){
-            throw new DomainException("Email already exists: " + userInput.email());
-        }
+        if(u.getRole() == UserRole.ADMIN){
+            log.info("Creating user...");
 
-        UserRole role = UserRole.fromExternal(userInput.role());
+            if (personRepository.existsByEmail(userInput.email())){
+                throw new DomainException("Email already exists: " + userInput.email());
+            }
 
-        User user = User.newInstance(userInput.login(), userInput.password(), role);
-        user = userRepository.save(user)
-            .orElseThrow(() -> new DataNotFoundException("User not found."));
+            UserRole role = UserRole.fromExternal(userInput.role());
 
-        Person person = Person.newInstance(user.getId(), userInput.firstName(), userInput.lastName(), userInput.phone(), userInput.email());
-        person = personRepository.save(person)
-            .orElseThrow(() -> new DataNotFoundException("User not found."));
-
-        var address = Address.newInstance(
-                user.getId(),
-                userInput.countryCode(), userInput.postalCode(), userInput.state(),
-                userInput.city(), userInput.street(), userInput.number(), userInput.complement()
-        );
-        address = addressRepositoryPort.save(address)
+            User user = User.newInstance(userInput.login(), userInput.password(), role);
+            user = userRepository.save(user)
                 .orElseThrow(() -> new DataNotFoundException("User not found."));
-                
-        return UserCreateOutput.fromDomain(user, person, address);
+
+            Person person = Person.newInstance(user.getId(), userInput.firstName(), userInput.lastName(), userInput.phone(), userInput.email());
+            person = personRepository.save(person)
+                .orElseThrow(() -> new DataNotFoundException("User not found."));
+
+            var address = Address.newInstance(
+                    user.getId(),
+                    userInput.countryCode(), userInput.postalCode(), userInput.state(),
+                    userInput.city(), userInput.street(), userInput.number(), userInput.complement()
+            );
+            address = addressRepositoryPort.save(address)
+                    .orElseThrow(() -> new DataNotFoundException("User not found."));
+
+            return UserCreateOutput.fromDomain(user, person, address);
+
+        }else {
+            throw new NotFindUserException("User not authorized to access this information");
+        }
     }
 
     @Override
-    public UserReadOutput findById(Long id) {
+    public UserReadOutput findById(String token,Long id) {
+
+        User u = jwtUtil.validateAndGetUsername(token);
+
+        if(u.getRole() == UserRole.ADMIN) {
+            return findByIdAux(id);
+        } else if (u.getRole() == UserRole.USER && u.getId() == id) {
+            return findByIdAux(id);
+        } else {
+            throw new NotFindUserException("User not authorized to access this information");
+        }
+    }
+    private UserReadOutput findByIdAux(Long id){
         log.info("Getting user by id...");
 
+
         Person person = personRepository.findByUserId(id)
-            .orElseThrow(() -> new DataNotFoundException("User not found."));
-        
+                .orElseThrow(() -> new DataNotFoundException("User not found."));
+
         Address address = addressRepositoryPort.findByUserId(id)
-            .orElseThrow(() -> new DataNotFoundException("User not found."));
+                .orElseThrow(() -> new DataNotFoundException("User not found."));
 
         return UserReadOutput.newInstance(id, person, address);
     }
@@ -94,7 +109,7 @@ public class UserService implements UserCrudPort {
 
         User u = jwtUtil.validateAndGetUsername(token);
 
-        if(u.getRole() == UserRole.USER){
+        if(u.getRole() == UserRole.ADMIN){
             List<Person> people = personRepository.findAll();
             List<Address> addresses = addressRepositoryPort.findAll();
 
@@ -116,60 +131,89 @@ public class UserService implements UserCrudPort {
     }
 
     @Override
-    public List<UserReadOutput> findByName(String name) {
-        log.info("Getting user by name...");
+    public List<UserReadOutput> findByName(String token,String name) {
 
-        List<Person> people = personRepository.searchByName(name);
+        User u = jwtUtil.validateAndGetUsername(token);
 
-        List<UserReadOutput> result = new ArrayList<>(people.size());
+        if(u.getRole() == UserRole.ADMIN){
+            log.info("Getting user by name...");
 
-        for (Person person : people){
-            var addressOpt = addressRepositoryPort.findByUserId(person.getUserId());
-            result.add(UserReadOutput.newInstance(person.getUserId(), person, addressOpt.orElse(null)));
+            List<Person> people = personRepository.searchByName(name);
+
+            List<UserReadOutput> result = new ArrayList<>(people.size());
+
+            for (Person person : people){
+                var addressOpt = addressRepositoryPort.findByUserId(person.getUserId());
+                result.add(UserReadOutput.newInstance(person.getUserId(), person, addressOpt.orElse(null)));
+            }
+            return result;
+        }else {
+            throw new NotFindUserException("User not authorized to access this information");
         }
-        return result;
     }
 
     @Override
-    public UserUpdateOutput udpate(Long id, UserUpdateInput userInput) {
+    public UserUpdateOutput udpate(String token,Long id, UserUpdateInput userInput) {
+        User u = jwtUtil.validateAndGetUsername(token);
+        if(u.getRole() == UserRole.ADMIN){
+            return updateAux(id,userInput);
+        }else if (u.getRole() == UserRole.USER && u.getId() == id) {
+            return updateAux(id,userInput);
+        } else {
+            throw new NotFindUserException("User not authorized to access this information");
+        }
+    }
+
+
+    private UserUpdateOutput updateAux(Long id, UserUpdateInput userInput){
         log.info("Updating user...");
 
         User user = userRepository.findById(id)
-            .orElseThrow(() -> new DataNotFoundException("User not found."));
-        
+                .orElseThrow(() -> new DataNotFoundException("User not found."));
+
         Person person = personRepository.findByUserId(id)
-            .orElseThrow(() -> new DataNotFoundException("User not found."));
-        
+                .orElseThrow(() -> new DataNotFoundException("User not found."));
+
         Address address = addressRepositoryPort.findByUserId(id)
-            .orElseThrow(() -> new DataNotFoundException("User not found."));
+                .orElseThrow(() -> new DataNotFoundException("User not found."));
 
         person.updatePersonalInfo(userInput.firstName(), userInput.lastName(), userInput.phone(), userInput.email());
         person = personRepository.save(person)
-            .orElseThrow(() -> new DataNotFoundException("User not found."));
+                .orElseThrow(() -> new DataNotFoundException("User not found."));
 
         address.updateAdress(userInput.countryCode(), userInput.postalCode(), userInput.state(), userInput.city(), userInput.street(), userInput.number(), userInput.complement());
         address = addressRepositoryPort.save(address)
-            .orElseThrow(() -> new DataNotFoundException("User not found."));
+                .orElseThrow(() -> new DataNotFoundException("User not found."));
 
         return UserUpdateOutput.newInstance(user, person, address);
     }
 
     @Override
-    public void deleteById(Long id) {
+    public void deleteById(String token,Long id) {
+        User u = jwtUtil.validateAndGetUsername(token);
+        if(u.getRole() == UserRole.ADMIN){
+            deleteAux(id);
+        }else if (u.getRole() == UserRole.USER && u.getId() == id) {
+            deleteAux(id);
+        } else {
+            throw new NotFindUserException("User not authorized to access this information");
+        }
+    }
+    private void deleteAux(Long id){
         log.info("Deleting user...");
 
         User user = userRepository.findById(id)
-            .orElseThrow(() -> new DataNotFoundException("User not found."));
+                .orElseThrow(() -> new DataNotFoundException("User not found."));
         user.delete();
         userRepository.save(user);
 
         Person person = personRepository.findByUserId(id)
-            .orElseThrow(() -> new DataNotFoundException("User not found."));
+                .orElseThrow(() -> new DataNotFoundException("User not found."));
         person.delete();
         personRepository.save(person);
 
         Address address = addressRepositoryPort.findByUserId(id)
-            .orElseThrow(() -> new DataNotFoundException("User not found."));
+                .orElseThrow(() -> new DataNotFoundException("User not found."));
         address.delete();
         addressRepositoryPort.save(address);
     }
@@ -190,5 +234,12 @@ public class UserService implements UserCrudPort {
         }else {
             throw  new NotFindUserException("Password incorrect");
         }
+    }
+
+    @Override
+    public void changePassword(String token, UserUpdatePasswordInput password) {
+        User u = jwtUtil.validateAndGetUsername(token);
+        //User user = userRepository.findById(u.getId()).orElseThrow(() -> new DataNotFoundException("User not found."));
+        userRepository.changePassword(u.getId(),password.newPassword());
     }
 }

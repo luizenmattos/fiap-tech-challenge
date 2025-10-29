@@ -17,7 +17,7 @@ import java.util.Date;
 @Component
 public class JwtUtil {
     private final Key key = Keys.hmacShaKeyFor("uma-chave-muito-grande-e-secreta-substitua-por-render".getBytes()); // use env var
-    private final long validityMillis = 1000L * 60 * 60 * 24; // 24h
+    private final long validityMillis = 1000L * 60 * 60 * 2; // 24h
 
     public String generateToken(User user) throws JsonProcessingException {
         Date now = new Date();
