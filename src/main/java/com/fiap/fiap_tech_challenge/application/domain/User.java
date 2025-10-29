@@ -15,15 +15,20 @@ public class User {
     private Instant updatedAt;
     private Instant deletedAt;
 
-    public static User newInstance(String login, String password){
+    public static User newInstance(String login, String password, UserRole role){
         User user = new User();
         user.login = login;
         user.password = password;
+        user.role = role;
         user.role = UserRole.USER;
         user.createdAt = Instant.now();
         user.updatedAt = Instant.now();
 
         return user;
+    }
+
+    public void delete(){
+        this.deletedAt = Instant.now();
     }
 
 }

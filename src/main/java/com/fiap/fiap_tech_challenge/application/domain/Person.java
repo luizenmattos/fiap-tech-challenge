@@ -32,10 +32,11 @@ public class Person {
         return person;
     }
 
-    public void updatePersonalInfo(String firstName, String lastName, String phone){
+    public void updatePersonalInfo(String firstName, String lastName, String phone, String email){
         if (firstName != null) this.firstName = firstName;
         if (lastName != null) this.lastName = lastName;
         if (phone != null) this.phone = phone;
+        if (email != null) this.email = email;
 
         this.updatedAt = Instant.now();
     }

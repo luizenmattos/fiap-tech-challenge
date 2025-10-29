@@ -7,11 +7,11 @@ import com.fiap.fiap_tech_challenge.application.domain.Person;
 
 public interface PersonRepositoryPort {
     
-    Person save(Person person);
+    Optional<Person> save(Person person);
     
-    void deleteById(Long id);
-
     Optional<Person> findByUserId(Long id);
+
+    List<Person> searchByName(String name);
 
     List<Person> findAll();
 

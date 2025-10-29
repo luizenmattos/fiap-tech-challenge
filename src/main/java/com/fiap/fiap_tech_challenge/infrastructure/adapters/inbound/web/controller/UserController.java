@@ -1,9 +1,6 @@
 package com.fiap.fiap_tech_challenge.infrastructure.adapters.inbound.web.controller;
 
-import com.fiap.fiap_tech_challenge.infrastructure.adapters.inbound.web.dto.LoginRequest;
-import com.fiap.fiap_tech_challenge.infrastructure.adapters.inbound.web.dto.UserCreateRequest;
-import com.fiap.fiap_tech_challenge.infrastructure.adapters.inbound.web.dto.UserResponse;
-import com.fiap.fiap_tech_challenge.infrastructure.adapters.inbound.web.dto.UserUpdateRequest;
+import com.fiap.fiap_tech_challenge.infrastructure.adapters.inbound.web.dto.*;
 import com.fiap.fiap_tech_challenge.application.port.inbound.UserCreateOutput;
 import com.fiap.fiap_tech_challenge.application.port.inbound.UserCrudPort;
 import com.fiap.fiap_tech_challenge.application.port.inbound.UserReadOutput;
@@ -42,25 +39,21 @@ public class UserController  {
     }
 
     @PostMapping
-    public ResponseEntity<UserResponse> create(@Valid @RequestBody UserCreateRequest dto){
-        UserCreateOutput user = userCrudPort.create(dto.toInput());
+    public ResponseEntity<UserResponse> create(
+            @RequestHeader(value = "Authorization", required = true) String token,
+            @Valid @RequestBody UserCreateRequest dto){
+        UserCreateOutput user = userCrudPort.create(token,dto.toInput());
         return ResponseEntity.ok().body(UserResponse.fromOutput(user));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<UserResponse> getById(@PathVariable Long id) {
-        UserReadOutput user = userCrudPort.findById(id);
+    public ResponseEntity<UserResponse> getById(
+            @RequestHeader(value = "Authorization", required = true) String token,
+            @PathVariable Long id
+    ) {
+        UserReadOutput user = userCrudPort.findById(token,id);
         return ResponseEntity.ok().body(UserResponse.fromOutput(user));
     }
-
-    // @GetMapping
-    // public ResponseEntity<Page<UserResponseDTO>> searchByName(
-    //         @RequestParam(required = false, defaultValue = "") String name,
-    //         @PageableDefault(size = 10) Pageable pageable) {
-    //     Page<User> page = userUseCase.searchByName(name, pageable);
-    //     Page<UserResponseDTO> dtoPage = page.map(this::toResponse);
-    //     return ResponseEntity.ok(dtoPage);
-    // }
 
     @GetMapping
     public ResponseEntity<List<UserResponse>> findAll(
@@ -77,11 +70,14 @@ public class UserController  {
     }
 
     @GetMapping("/findByName/{name}")
-    public ResponseEntity<List<UserResponse>> findByName(@PathVariable String name) {
+    public ResponseEntity<List<UserResponse>> findByName(
+            @RequestHeader(value = "Authorization", required = true) String token,
+            @PathVariable String name
+    ) {
         System.out.println(name);
         List<UserResponse> usersResponse = new ArrayList<>();
 
-        List<UserReadOutput> usersOutput = userCrudPort.findByName(name);
+        List<UserReadOutput> usersOutput = userCrudPort.findByName(token,name);
         for(UserReadOutput user : usersOutput){
             usersResponse.add(UserResponse.fromOutput(user));
 
@@ -90,14 +86,31 @@ public class UserController  {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<UserResponse> update(@PathVariable Long id, @Valid @RequestBody UserUpdateRequest dto) {
-        UserUpdateOutput userOutput = userCrudPort.udpate(id, dto.toInput());
+    public ResponseEntity<UserResponse> update(
+            @RequestHeader(value = "Authorization", required = true) String token,
+            @PathVariable Long id,
+            @Valid @RequestBody UserUpdateRequest dto
+    ) {
+        UserUpdateOutput userOutput = userCrudPort.udpate(token,id, dto.toInput());
         return ResponseEntity.ok(UserResponse.fromOutput(userOutput));
     }
 
+    @PutMapping("/new-password")
+    public ResponseEntity<UserResponse> changePassword(
+            @RequestHeader(value = "Authorization", required = true) String token,
+            @Valid @RequestBody UserUpdatePassword dto
+    ) {
+        userCrudPort.changePassword(token, dto.toInput());
+        return ResponseEntity.noContent().build();
+    }
+
+
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
-        userCrudPort.deleteById(id);
+    public ResponseEntity<Void> delete(
+            @RequestHeader(value = "Authorization", required = true) String token,
+            @PathVariable Long id
+    ) {
+        userCrudPort.deleteById(token,id);
         return ResponseEntity.noContent().build();
     }
 

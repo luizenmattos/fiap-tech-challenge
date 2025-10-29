@@ -21,26 +21,21 @@ public class AdressRepositoryAdapter implements AddressRepositoryPort {
     }
 
     @Override
-    public Address save(Address address) {
+    public Optional<Address> save(Address address) {
         var entity = toEntity(address);
         var saved = addressJpaRepository.save(entity);
-        return  toDomain(saved);
-    }
-
-    @Override
-    public void deleteById(Long id) {
-        addressJpaRepository.deleteById(id);
+        return  Optional.of(toDomain(saved)) ;
     }
 
     @Override
     public Optional<Address> findByUserId(Long id) {
-        Optional<AddressJpaEntity> entity = addressJpaRepository.findByUserId(id);
+        Optional<AddressJpaEntity> entity = addressJpaRepository.findByUserIdAndDeletedAtIsNull(id);
         return entity.map(this::toDomain);
     }
 
     @Override
     public List<Address> findAll() {
-        return addressJpaRepository.findAll()
+        return addressJpaRepository.findAllByDeletedAtIsNull()
                 .stream()
                 .map(this::toDomain)
                 .collect(Collectors.toList());

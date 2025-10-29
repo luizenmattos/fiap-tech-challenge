@@ -10,6 +10,7 @@ public class UserUpdateRequest {
     private String firstName;
     private String lastName;
     private String phone;
+    private String email;
     private String countryCode;
     private String postalCode;
     private String state;
@@ -23,6 +24,7 @@ public class UserUpdateRequest {
             this.firstName,
             this.lastName,
             this.phone,
+            this.email,
             this.countryCode,
             this.postalCode,
             this.state,

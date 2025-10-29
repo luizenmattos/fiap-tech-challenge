@@ -4,16 +4,14 @@ import com.fiap.fiap_tech_challenge.application.domain.User;
 
 import java.util.Optional;
 
-// import org.springframework.security.core.userdetails.UserDetails;
-
 public interface UserRepositoryPort {
 
-    User save(User user);
-
-    void deleteById(Long id);
+    Optional<User> save(User user);
 
     Optional<User> findById(Long id);
 
-    User findByLogin(String login); //ESTA CERTO RETORNAR USER DETAILS???
+    Optional<User> findByLogin(String login);
+
+    void changePassword(Long id,String pass);
 }
 

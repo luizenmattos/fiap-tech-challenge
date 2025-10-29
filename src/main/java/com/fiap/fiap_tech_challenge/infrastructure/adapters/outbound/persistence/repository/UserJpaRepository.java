@@ -4,13 +4,23 @@ import com.fiap.fiap_tech_challenge.infrastructure.adapters.outbound.persistence
 
 import java.util.Optional;
 
+import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 // import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UserJpaRepository extends JpaRepository<UserJpaEntity, Long> {
 
-    Optional<UserJpaEntity> findByLogin(String login);
+    Optional<UserJpaEntity> findByIdAndDeletedAtIsNull(Long id);
+
+    Optional<UserJpaEntity> findByLoginAndDeletedAtIsNull(String login);
+
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE user_table u SET u.password = :pass WHERE u.id = :id", nativeQuery = true)
+    void changePassword(Long id,String pass);
 
 }

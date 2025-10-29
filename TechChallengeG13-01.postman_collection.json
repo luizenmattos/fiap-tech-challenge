@@ -1,20 +1,25 @@
 {
 	"info": {
-		"_postman_id": "6000949c-5e0b-44ab-a39d-087d9e42452f",
+		"_postman_id": "f7473ffb-c526-4304-9e29-dbd1c4ef8263",
 		"name": "TechChallengeG13-01",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "31345798",
-		"_collection_link": "https://agriwin.postman.co/workspace/My-Workspace~07854931-9c7d-4448-8e7d-834e49f03a92/collection/31345798-6000949c-5e0b-44ab-a39d-087d9e42452f?action=share&source=collection_link&creator=31345798"
+		"_exporter_id": "4094701"
 	},
 	"item": [
 		{
-			"name": "Create User",
+			"name": "Create User / dono",
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"login\":\"luizen\",\n    \"password\":\"12345\",\n    \"firstName\":\"Luiz\",\n    \"lastName\":\"Mattos\",\n    \"phone\":\"42991646066\",\n    \"countryCode\":\"55\",\n    \"postalCode\":\"84010360\",\n    \"state\":\"Parana\",\n    \"city\":\"Ponta Grossa\",\n    \"street\":\"Santos Dumont\",\n    \"number\":\"370\",\n    \"complement\":\"AP 32\"\n}",
+					"raw": "{\n  \"login\": \"chef01\",\n  \"password\": \"SenhaForte123!\",\n  \"firstName\": \"Dona\",\n  \"lastName\": \"Maria\",\n  \"email\": \"chef@restaurante.com\",\n  \"role\": \"dono de restaurante\",\n\n  \"postalCode\": \"01001-000\",\n  \"state\": \"SP\",\n  \"city\": \"São Paulo\",\n  \"street\": \"Praça da Sé\",\n  \"number\": \"100\",\n  \"complement\": \"Sala 5\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -38,13 +43,19 @@
 			"response": []
 		},
 		{
-			"name": "Create User (error - email ja cadastrado)",
+			"name": "Create User / cliente",
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\"name\": \"usuário 2\",\n\"login\": \"loginUsuario1\",\n\"password\": \"12345678\",\n\"email\": \"usuario1@email.com\",\n\"role\": \"ADMIN\"\n}",
+					"raw": "{\n  \"login\": \"usuario01\",\n  \"password\": \"SenhaForte123!\",\n  \"firstName\": \"Seu\",\n  \"lastName\": \"Zé\",\n  \"email\": \"seu@ze.com\",\n  \"role\": \"cliente\",\n\n  \"postalCode\": \"01001-000\",\n  \"state\": \"SP\",\n  \"city\": \"São Paulo\",\n  \"street\": \"Praça da Só\",\n  \"number\": \"101\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -68,13 +79,19 @@
 			"response": []
 		},
 		{
-			"name": "Create User (com address)",
+			"name": "Create User / erro email",
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\"name\": \"usuário 3\",\n\"login\": \"loginUsuario3\",\n\"password\": \"12345678\",\n\"email\": \"usuario3@email.com\",\n\"role\": \"ADMIN\",\n\"adress\": {\n    \"street\": \"rua 3\",\n    \"number\": \"13\",\n    \"city\": \"Sãp Paulo\",\n    \"cep\": \"12345000\"\n}\n}",
+					"raw": "{\n  \"login\": \"usuario02\",\n  \"password\": \"SenhaForte123!\",\n  \"firstName\": \"Seu\",\n  \"lastName\": \"Zé\",\n  \"email\": \"seu@ze.com\",\n  \"role\": \"cliente\",\n\n  \"postalCode\": \"01001-000\",\n  \"state\": \"SP\",\n  \"city\": \"São Paulo\",\n  \"street\": \"Praça da Só\",\n  \"number\": \"101\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -92,6 +109,73 @@
 						"api",
 						"v1",
 						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create User / erro sem endereço",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"login\": \"usuario02\",\n  \"password\": \"SenhaForte123!\",\n  \"firstName\": \"João\",\n  \"lastName\": \"Banana\",\n  \"email\": \"joao@banana.com\",\n  \"role\": \"cliente\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"login\": \"root\",\n  \"password\": \"root\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/users/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"login"
 					]
 				}
 			},
@@ -101,7 +185,13 @@
 			"name": "Get Users",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ7XCJpZFwiOjEsXCJsb2dpblwiOlwicm9vdFwiLFwicGFzc3dvcmRcIjpcInJvb3RcIixcInJvbGVcIjpcIkFETUlOXCIsXCJjcmVhdGVkQXRcIjoxNzYxNjk2MTA5LjI4NDI3OTAwMCxcInVwZGF0ZWRBdFwiOm51bGwsXCJkZWxldGVkQXRcIjpudWxsfSIsImlhdCI6MTc2MTY5NjE0OSwiZXhwIjoxNzYxNzAzMzQ5fQ.iXA4ZbbVaONOwgpeFbFSR8fihjriNBEu8-fIMsjJ2Hc",
+						"type": "text"
+					}
+				],
 				"url": {
 					"raw": "http://localhost:8080/api/v1/users",
 					"protocol": "http",
@@ -122,7 +212,13 @@
 			"name": "Get Users By id",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ7XCJpZFwiOjEsXCJsb2dpblwiOlwiY2hlZjAxXCIsXCJwYXNzd29yZFwiOlwiU2VuaGFGb3J0ZTEyMyFcIixcInJvbGVcIjpcIlVTRVJcIixcImNyZWF0ZWRBdFwiOjE3NjE1MTg5MDAuNTY3OTY4MDAwLFwidXBkYXRlZEF0XCI6MTc2MTUxODkwMC41Njc5OTAwMDAsXCJkZWxldGVkQXRcIjpudWxsfSIsImlhdCI6MTc2MTUxOTE4NCwiZXhwIjoxNzYxNjA1NTg0fQ.IdL2umR_sSclk6lC8jRLbVcUdlZKXpuaOnB-aj5vOa4",
+						"type": "text"
+					}
+				],
 				"url": {
 					"raw": "http://localhost:8080/api/v1/users/1",
 					"protocol": "http",
@@ -144,9 +240,15 @@
 			"name": "Get Users By Name",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ7XCJpZFwiOjEsXCJsb2dpblwiOlwiY2hlZjAxXCIsXCJwYXNzd29yZFwiOlwiU2VuaGFGb3J0ZTEyMyFcIixcInJvbGVcIjpcIlVTRVJcIixcImNyZWF0ZWRBdFwiOjE3NjE1MTg5MDAuNTY3OTY4MDAwLFwidXBkYXRlZEF0XCI6MTc2MTUxODkwMC41Njc5OTAwMDAsXCJkZWxldGVkQXRcIjpudWxsfSIsImlhdCI6MTc2MTUxOTE4NCwiZXhwIjoxNzYxNjA1NTg0fQ.IdL2umR_sSclk6lC8jRLbVcUdlZKXpuaOnB-aj5vOa4",
+						"type": "text"
+					}
+				],
 				"url": {
-					"raw": "http://localhost:8080/api/v1/users/findByName/Luiz Mattos",
+					"raw": "http://localhost:8080/api/v1/users/findByName/dona",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -157,7 +259,7 @@
 						"v1",
 						"users",
 						"findByName",
-						"Luiz Mattos"
+						"dona"
 					]
 				}
 			},
@@ -167,10 +269,16 @@
 			"name": "Put User",
 			"request": {
 				"method": "PUT",
-				"header": [],
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"firstName\": \"firstName updated\",\n    \"state\": \"state updated\"\n}",
+					"raw": "{\n  \"login\": \"usuario01 - modificado\",\n  \"password\": \"SenhaForte123!\",\n  \"firstName\": \"Seu\",\n  \"lastName\": \"Zé\",\n  \"email\": \"seu2@ze.com\",\n  \"role\": \"cliente\",\n\n  \"postalCode\": \"01001-000\",\n  \"state\": \"SP\",\n  \"city\": \"São Paulo\",\n  \"street\": \"Praça da Só\",\n  \"number\": \"101\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -198,13 +306,19 @@
 			"name": "Delete User",
 			"request": {
 				"method": "DELETE",
-				"header": [],
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\"name\": \"usuário modificado\",\n\"login\": \"loginUsuario2\",\n\"password\": \"12345678\",\n\"email\": \"usuario1@email.com\",\n\"role\": \"ADMIN\"\n}"
+					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/v1/users/1",
+					"raw": "http://localhost:8080/api/v1/users/2",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -214,7 +328,7 @@
 						"api",
 						"v1",
 						"users",
-						"1"
+						"2"
 					]
 				}
 			},

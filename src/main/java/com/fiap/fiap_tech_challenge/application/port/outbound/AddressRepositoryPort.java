@@ -7,10 +7,8 @@ import com.fiap.fiap_tech_challenge.application.domain.Address;
 
 public interface AddressRepositoryPort {
     
-    Address save(Address address);
+    Optional<Address> save(Address address);
     
-    void deleteById(Long id);
-
     Optional<Address> findByUserId(Long id);
 
     List<Address> findAll();
