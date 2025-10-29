@@ -24,3 +24,8 @@ VALUES
 (3, 3, 'Rua das Palmeiras', '300', 'Belo Horizonte', 'MG', '30130-010', CURRENT_TIMESTAMP),
 (4, 4, 'Av. Atlântica', '400', 'Curitiba', 'PR', '80010-010', CURRENT_TIMESTAMP),
 (5, 5, 'Rua Central', '500', 'Porto Alegre', 'RS', '90010-001', CURRENT_TIMESTAMP);
+
+-- Ajustar sequences para continuar após os inserts manuais
+ALTER SEQUENCE user_table_id_seq RESTART WITH 6;
+ALTER SEQUENCE person_table_id_seq RESTART WITH 6;
+ALTER SEQUENCE address_table_id_seq RESTART WITH 6;

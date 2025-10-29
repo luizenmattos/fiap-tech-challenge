@@ -1,9 +1,10 @@
 {
 	"info": {
-		"_postman_id": "f7473ffb-c526-4304-9e29-dbd1c4ef8263",
+		"_postman_id": "e4fe6649-6cb7-4cd6-a986-c93336dfce40",
 		"name": "TechChallengeG13-01",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "4094701"
+		"_exporter_id": "31345798",
+		"_collection_link": "https://agriwin.postman.co/workspace/My-Workspace~07854931-9c7d-4448-8e7d-834e49f03a92/collection/31345798-e4fe6649-6cb7-4cd6-a986-c93336dfce40?action=share&source=collection_link&creator=31345798"
 	},
 	"item": [
 		{
@@ -13,7 +14,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ7XCJpZFwiOjEsXCJsb2dpblwiOlwicm9vdFwiLFwicGFzc3dvcmRcIjpcInJvb3RcIixcInJvbGVcIjpcIkFETUlOXCIsXCJjcmVhdGVkQXRcIjoxNzYxNzc5OTA5LjY1NDg1MDAwMCxcInVwZGF0ZWRBdFwiOm51bGwsXCJkZWxldGVkQXRcIjpudWxsfSIsImlhdCI6MTc2MTc4MDUwNCwiZXhwIjoxNzYxNzg3NzA0fQ.V-2I59_A6CRYaVrG6sMTNumXUFdszoqeIYJOhXOqV7I",
 						"type": "text"
 					}
 				],
@@ -27,12 +28,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/v1/users",
-					"protocol": "http",
+					"raw": "{{BASE_URL}}/api/v1/users",
 					"host": [
-						"localhost"
+						"{{BASE_URL}}"
 					],
-					"port": "8080",
 					"path": [
 						"api",
 						"v1",
@@ -49,7 +48,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ7XCJpZFwiOjEsXCJsb2dpblwiOlwicm9vdFwiLFwicGFzc3dvcmRcIjpcInJvb3RcIixcInJvbGVcIjpcIkFETUlOXCIsXCJjcmVhdGVkQXRcIjoxNzYxNzc5OTA5LjY1NDg1MDAwMCxcInVwZGF0ZWRBdFwiOm51bGwsXCJkZWxldGVkQXRcIjpudWxsfSIsImlhdCI6MTc2MTc4MDUwNCwiZXhwIjoxNzYxNzg3NzA0fQ.V-2I59_A6CRYaVrG6sMTNumXUFdszoqeIYJOhXOqV7I",
 						"type": "text"
 					}
 				],
@@ -63,12 +62,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/v1/users",
-					"protocol": "http",
+					"raw": "{{BASE_URL}}/api/v1/users",
 					"host": [
-						"localhost"
+						"{{BASE_URL}}"
 					],
-					"port": "8080",
 					"path": [
 						"api",
 						"v1",
@@ -99,12 +96,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/v1/users",
-					"protocol": "http",
+					"raw": "{{BASE_URL}}/api/v1/users",
 					"host": [
-						"localhost"
+						"{{BASE_URL}}"
 					],
-					"port": "8080",
 					"path": [
 						"api",
 						"v1",
@@ -135,12 +130,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/v1/users",
-					"protocol": "http",
+					"raw": "{{BASE_URL}}/api/v1/users",
 					"host": [
-						"localhost"
+						"{{BASE_URL}}"
 					],
-					"port": "8080",
 					"path": [
 						"api",
 						"v1",
@@ -165,12 +158,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/v1/users/login",
-					"protocol": "http",
+					"raw": "{{BASE_URL}}/api/v1/users/login",
 					"host": [
-						"localhost"
+						"{{BASE_URL}}"
 					],
-					"port": "8080",
 					"path": [
 						"api",
 						"v1",
@@ -193,12 +184,10 @@
 					}
 				],
 				"url": {
-					"raw": "http://localhost:8080/api/v1/users",
-					"protocol": "http",
+					"raw": "{{BASE_URL}}/api/v1/users",
 					"host": [
-						"localhost"
+						"{{BASE_URL}}"
 					],
-					"port": "8080",
 					"path": [
 						"api",
 						"v1",
@@ -220,12 +209,10 @@
 					}
 				],
 				"url": {
-					"raw": "http://localhost:8080/api/v1/users/1",
-					"protocol": "http",
+					"raw": "{{BASE_URL}}/api/v1/users/1",
 					"host": [
-						"localhost"
+						"{{BASE_URL}}"
 					],
-					"port": "8080",
 					"path": [
 						"api",
 						"v1",
@@ -248,12 +235,10 @@
 					}
 				],
 				"url": {
-					"raw": "http://localhost:8080/api/v1/users/findByName/dona",
-					"protocol": "http",
+					"raw": "{{BASE_URL}}/api/v1/users/findByName/dona",
 					"host": [
-						"localhost"
+						"{{BASE_URL}}"
 					],
-					"port": "8080",
 					"path": [
 						"api",
 						"v1",
@@ -286,12 +271,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/v1/users/1",
-					"protocol": "http",
+					"raw": "{{BASE_URL}}/api/v1/users/1",
 					"host": [
-						"localhost"
+						"{{BASE_URL}}"
 					],
-					"port": "8080",
 					"path": [
 						"api",
 						"v1",
@@ -318,12 +301,10 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/v1/users/2",
-					"protocol": "http",
+					"raw": "{{BASE_URL}}/api/v1/users/2",
 					"host": [
-						"localhost"
+						"{{BASE_URL}}"
 					],
-					"port": "8080",
 					"path": [
 						"api",
 						"v1",
@@ -333,6 +314,36 @@
 				}
 			},
 			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "BASE_URL",
+			"value": ""
 		}
 	]
 }
