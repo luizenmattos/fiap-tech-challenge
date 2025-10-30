@@ -20,7 +20,7 @@ public interface UserJpaRepository extends JpaRepository<UserJpaEntity, Long> {
 
     @Modifying
     @Transactional
-    @Query(value = "UPDATE user_table u SET u.password = :pass WHERE u.id = :id", nativeQuery = true)
+    @Query(value = "UPDATE user_table SET password = :pass WHERE id = :id", nativeQuery = true)
     void changePassword(Long id,String pass);
 
 }

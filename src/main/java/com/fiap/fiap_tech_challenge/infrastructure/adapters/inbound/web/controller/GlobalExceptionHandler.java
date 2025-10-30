@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import com.fiap.fiap_tech_challenge.application.domain.exception.DataNotFoundException;
 import com.fiap.fiap_tech_challenge.application.domain.exception.DomainException;
 import com.fiap.fiap_tech_challenge.application.domain.exception.NotFindUserException;
+import com.fiap.fiap_tech_challenge.application.domain.exception.InvalidOrExpiredToken;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
@@ -42,6 +43,19 @@ public class GlobalExceptionHandler {
     public ProblemDetail handleDataNotFoundException(DomainException ex) {
         ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(
             HttpStatus.BAD_REQUEST,
+            ex.getMessage()
+        );
+
+        problemDetail.setTitle("Operation not allowed");
+        problemDetail.setProperty("timestamp", System.currentTimeMillis());
+
+        return problemDetail;
+    }
+
+    @ExceptionHandler(InvalidOrExpiredToken.class)
+    public ProblemDetail handleDataNotFoundException(InvalidOrExpiredToken ex) {
+        ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(
+            HttpStatus.UNAUTHORIZED,
             ex.getMessage()
         );
 
