@@ -1,5 +1,7 @@
 package com.fiap.fiap_tech_challenge.application.port.inbound;
 
+import java.time.Instant;
+
 import com.fiap.fiap_tech_challenge.application.domain.Address;
 import com.fiap.fiap_tech_challenge.application.domain.Person;
 
@@ -15,7 +17,8 @@ public record UserReadOutput(
     String city,
     String street,
     String number,
-    String complement
+    String complement,
+    Instant updatedAt
     ) {
 
 
@@ -32,7 +35,8 @@ public record UserReadOutput(
             address.getCity(),
             address.getStreet(),
             address.getNumber(),
-            address.getComplement()
+            address.getComplement(),
+            person.getUpdatedAt()
         );
     }
 }
