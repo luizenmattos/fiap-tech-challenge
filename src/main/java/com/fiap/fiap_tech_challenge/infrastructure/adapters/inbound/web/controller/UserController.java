@@ -10,11 +10,15 @@ import com.fiap.fiap_tech_challenge.application.port.inbound.UserUpdateOutput;
 // import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 // import org.springframework.security.core.Authentication;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,15 +34,17 @@ public class UserController  {
         this.userCrudPort = userService;
     }
 
-    @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody LoginRequest loginRequest) {
+    @PostMapping(path = "/login",produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> login(
+            @RequestBody LoginRequest loginRequest) {
 
          return ResponseEntity.ok().body(
             userCrudPort.login(loginRequest.getLogin(), loginRequest.getPassword())
          );
     }
 
-    @PostMapping
+
+    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<UserResponse> create(
             @RequestHeader(value = "Authorization", required = true) String token,
             @Valid @RequestBody UserCreateRequest dto){
@@ -46,7 +52,7 @@ public class UserController  {
         return ResponseEntity.ok().body(UserResponse.fromOutput(user));
     }
 
-    @GetMapping("/{id}")
+    @GetMapping(path = "/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<UserResponse> getById(
             @RequestHeader(value = "Authorization", required = true) String token,
             @PathVariable Long id
@@ -55,7 +61,7 @@ public class UserController  {
         return ResponseEntity.ok().body(UserResponse.fromOutput(user));
     }
 
-    @GetMapping
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<UserResponse>> findAll(
             @RequestHeader(value = "Authorization", required = true) String token
     ) {
@@ -69,7 +75,7 @@ public class UserController  {
         return ResponseEntity.ok().body(usersResponse);
     }
 
-    @GetMapping("/findByName/{name}")
+    @GetMapping(path="/findByName/{name}",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<UserResponse>> findByName(
             @RequestHeader(value = "Authorization", required = true) String token,
             @PathVariable String name
@@ -85,7 +91,7 @@ public class UserController  {
         return ResponseEntity.ok().body(usersResponse);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping(path="/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<UserResponse> update(
             @RequestHeader(value = "Authorization", required = true) String token,
             @PathVariable Long id,
@@ -95,7 +101,7 @@ public class UserController  {
         return ResponseEntity.ok(UserResponse.fromOutput(userOutput));
     }
 
-    @PutMapping("/new-password")
+    @PutMapping(path="/new-password",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<UserResponse> changePassword(
             @RequestHeader(value = "Authorization", required = true) String token,
             @Valid @RequestBody UserUpdatePassword dto
@@ -105,7 +111,7 @@ public class UserController  {
     }
 
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping(path="/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> delete(
             @RequestHeader(value = "Authorization", required = true) String token,
             @PathVariable Long id
