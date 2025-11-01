@@ -40,13 +40,13 @@ public class UserService implements UserCrudPort {
     @Override
     public UserCreateOutput create(String token,UserCreateInput userInput) {
         User loggedUser = jwtUtil.validateAndGetUsername(token);
-        Validations.validateAdmin(loggedUser);
+        Validations.validateOwner(loggedUser);
 
         User user = User.newInstance(userInput.login(), userInput.password(), UserRole.fromExternal(userInput.role()));
         Person person = Person.newInstance(user.getId(), userInput.firstName(), userInput.lastName(), userInput.phone(), userInput.email());
         Address address = Address.newInstance(user.getId(),userInput.countryCode(), userInput.postalCode(), userInput.state(),userInput.city(), userInput.street(), userInput.number(), userInput.complement());
 
-        Validations.validateBeforeUserCreate(user, person, address);
+        Validations.validateBeforeUserCreate(user, person, address, personRepository);
 
         user = userRepository.save(user)
             .orElseThrow(() -> new EntityNotFoundException("User not found."));
@@ -65,7 +65,7 @@ public class UserService implements UserCrudPort {
     @Override
     public UserReadOutput findById(String token,Long id) {
         User loggedUser = jwtUtil.validateAndGetUsername(token);
-        Validations.validateAdminOrUser(loggedUser, id);
+        Validations.validateOwnerOrClient(loggedUser, id);
 
         User user = userRepository.findById(id)
             .orElseThrow(() -> new EntityNotFoundException("User not found."));
@@ -83,7 +83,7 @@ public class UserService implements UserCrudPort {
     @Override
     public List<UserReadOutput> findAll(String token) {
         User loggedUser = jwtUtil.validateAndGetUsername(token);
-        Validations.validateAdmin(loggedUser);
+        Validations.validateOwner(loggedUser);
 
         List<User> users = userRepository.findAll();
         List<Person> people = personRepository.findAll();
@@ -112,7 +112,7 @@ public class UserService implements UserCrudPort {
     @Override
     public List<UserReadOutput> findByName(String token,String name) {
         User loggedUser = jwtUtil.validateAndGetUsername(token);
-        Validations.validateAdmin(loggedUser);
+        Validations.validateOwner(loggedUser);
 
         List<UserReadOutput> userReadOutputs = this.findAll(token);
 
@@ -124,7 +124,7 @@ public class UserService implements UserCrudPort {
     @Override
     public UserUpdateOutput udpate(String token, Long id, UserUpdateInput userInput) {
         User loggedUser = jwtUtil.validateAndGetUsername(token);
-        Validations.validateAdminOrUser(loggedUser, id);
+        Validations.validateOwnerOrClient(loggedUser, id);
 
         User user = userRepository.findById(id)
             .orElseThrow(() -> new EntityNotFoundException("User not found."));
@@ -138,7 +138,7 @@ public class UserService implements UserCrudPort {
         person.updatePersonalInfo(userInput.firstName(), userInput.lastName(), userInput.phone(), userInput.email());
         address.updateAdress(userInput.countryCode(), userInput.postalCode(), userInput.state(), userInput.city(), userInput.street(), userInput.number(), userInput.complement());
         
-        Validations.validateBeforeUserUpdate(user, person, address);
+        Validations.validateBeforeUserUpdate(user, person, address, personRepository);
 
         person = personRepository.save(person)
             .orElseThrow(() -> new EntityNotFoundException("User not found."));
@@ -152,7 +152,7 @@ public class UserService implements UserCrudPort {
     @Override
     public void deleteById(String token,Long id) {
         User loggedUser = jwtUtil.validateAndGetUsername(token);
-        Validations.validateAdminOrUser(loggedUser, id);
+        Validations.validateOwnerOrClient(loggedUser, id);
 
         User user = userRepository.findById(id)
             .orElseThrow(() -> new EntityNotFoundException("User not found."));
@@ -189,6 +189,7 @@ public class UserService implements UserCrudPort {
     @Override
     public void changePassword(String token, UserUpdatePasswordInput password) {
         User loggedUser = jwtUtil.validateAndGetUsername(token);
+        Validations.validateOwner(loggedUser);
         userRepository.changePassword(loggedUser.getId(),password.newPassword());
     }
 }

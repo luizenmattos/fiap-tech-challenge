@@ -25,7 +25,6 @@ public class JwtUtil {
 
         // Converte o objeto em JSON String
         String jsonString = mapper.writeValueAsString(user);
-        System.out.println(jsonString);
         return Jwts.builder()
                 .setSubject(jsonString)
                 .setIssuedAt(now)
@@ -43,7 +42,6 @@ public class JwtUtil {
 
             ObjectMapper mapper = new ObjectMapper().findAndRegisterModules();
 
-            System.out.println(parsed.getBody().getSubject());
             return mapper.readValue(parsed.getBody().getSubject(), User.class);
 
 

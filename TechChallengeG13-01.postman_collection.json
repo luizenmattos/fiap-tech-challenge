@@ -1,10 +1,10 @@
 {
 	"info": {
-		"_postman_id": "e4fe6649-6cb7-4cd6-a986-c93336dfce40",
+		"_postman_id": "8f8a7acf-c4b3-47bf-849f-b41462f17abf",
 		"name": "TechChallengeG13-01",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "31345798",
-		"_collection_link": "https://agriwin.postman.co/workspace/My-Workspace~07854931-9c7d-4448-8e7d-834e49f03a92/collection/31345798-e4fe6649-6cb7-4cd6-a986-c93336dfce40?action=share&source=collection_link&creator=31345798"
+		"_collection_link": "https://agriwin.postman.co/workspace/My-Workspace~07854931-9c7d-4448-8e7d-834e49f03a92/collection/31345798-8f8a7acf-c4b3-47bf-849f-b41462f17abf?action=share&source=collection_link&creator=31345798"
 	},
 	"item": [
 		{
@@ -14,13 +14,13 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ7XCJpZFwiOjEsXCJsb2dpblwiOlwicm9vdFwiLFwicGFzc3dvcmRcIjpcInJvb3RcIixcInJvbGVcIjpcIkFETUlOXCIsXCJjcmVhdGVkQXRcIjoxNzYxNzc5OTA5LjY1NDg1MDAwMCxcInVwZGF0ZWRBdFwiOm51bGwsXCJkZWxldGVkQXRcIjpudWxsfSIsImlhdCI6MTc2MTc4MDUwNCwiZXhwIjoxNzYxNzg3NzA0fQ.V-2I59_A6CRYaVrG6sMTNumXUFdszoqeIYJOhXOqV7I",
+						"value": "{{TOKEN}}",
 						"type": "text"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"login\": \"chef01\",\n  \"password\": \"SenhaForte123!\",\n  \"firstName\": \"Dona\",\n  \"lastName\": \"Maria\",\n  \"email\": \"chef@restaurante.com\",\n  \"role\": \"dono de restaurante\",\n\n  \"postalCode\": \"01001-000\",\n  \"state\": \"SP\",\n  \"city\": \"São Paulo\",\n  \"street\": \"Praça da Sé\",\n  \"number\": \"100\",\n  \"complement\": \"Sala 5\"\n}",
+					"raw": "{\n  \"login\": \"chef01\",\n  \"password\": \"SenhaForte123!\",\n  \"firstName\": \"Dona\",\n  \"lastName\": \"Maria\",\n  \"email\": \"chef@restaurante.com\",\n  \"role\": \"owner\",\n\n  \"postalCode\": \"01001-000\",\n  \"state\": \"SP\",\n  \"city\": \"São Paulo\",\n  \"street\": \"Praça da Sé\",\n  \"number\": \"100\",\n  \"complement\": \"Sala 5\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -48,13 +48,13 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ7XCJpZFwiOjEsXCJsb2dpblwiOlwicm9vdFwiLFwicGFzc3dvcmRcIjpcInJvb3RcIixcInJvbGVcIjpcIkFETUlOXCIsXCJjcmVhdGVkQXRcIjoxNzYxNzc5OTA5LjY1NDg1MDAwMCxcInVwZGF0ZWRBdFwiOm51bGwsXCJkZWxldGVkQXRcIjpudWxsfSIsImlhdCI6MTc2MTc4MDUwNCwiZXhwIjoxNzYxNzg3NzA0fQ.V-2I59_A6CRYaVrG6sMTNumXUFdszoqeIYJOhXOqV7I",
+						"value": "{{TOKEN}}",
 						"type": "text"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"login\": \"usuario01\",\n  \"password\": \"SenhaForte123!\",\n  \"firstName\": \"Seu\",\n  \"lastName\": \"Zé\",\n  \"email\": \"seu@ze.com\",\n  \"role\": \"cliente\",\n\n  \"postalCode\": \"01001-000\",\n  \"state\": \"SP\",\n  \"city\": \"São Paulo\",\n  \"street\": \"Praça da Só\",\n  \"number\": \"101\"\n}",
+					"raw": "{\n  \"login\": \"usuario01\",\n  \"password\": \"SenhaForte123!\",\n  \"firstName\": \"Seu\",\n  \"lastName\": \"Zé\",\n  \"email\": \"seu@ze.com\",\n  \"role\": \"client\",\n\n  \"postalCode\": \"01001-000\",\n  \"state\": \"SP\",\n  \"city\": \"São Paulo\",\n  \"street\": \"Praça da Só\",\n  \"number\": \"101\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -82,13 +82,13 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "",
+						"value": "{{TOKEN}}",
 						"type": "text"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"login\": \"usuario02\",\n  \"password\": \"SenhaForte123!\",\n  \"firstName\": \"Seu\",\n  \"lastName\": \"Zé\",\n  \"email\": \"seu@ze.com\",\n  \"role\": \"cliente\",\n\n  \"postalCode\": \"01001-000\",\n  \"state\": \"SP\",\n  \"city\": \"São Paulo\",\n  \"street\": \"Praça da Só\",\n  \"number\": \"101\"\n}",
+					"raw": "{\n  \"login\": \"usuario02\",\n  \"password\": \"SenhaForte123!\",\n  \"firstName\": \"Seu\",\n  \"lastName\": \"Zé\",\n  \"role\": \"client\",\n  \"email\":\"asdasdsa\",\n  \"postalCode\": \"01001-000\",\n  \"state\": \"SP\",\n  \"city\": \"São Paulo\",\n  \"street\": \"Praça da Só\",\n  \"number\": \"101\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -116,7 +116,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "",
+						"value": "{{TOKEN}}",
 						"type": "text"
 					}
 				],
@@ -179,7 +179,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ7XCJpZFwiOjEsXCJsb2dpblwiOlwicm9vdFwiLFwicGFzc3dvcmRcIjpcInJvb3RcIixcInJvbGVcIjpcIkFETUlOXCIsXCJjcmVhdGVkQXRcIjoxNzYxNjk2MTA5LjI4NDI3OTAwMCxcInVwZGF0ZWRBdFwiOm51bGwsXCJkZWxldGVkQXRcIjpudWxsfSIsImlhdCI6MTc2MTY5NjE0OSwiZXhwIjoxNzYxNzAzMzQ5fQ.iXA4ZbbVaONOwgpeFbFSR8fihjriNBEu8-fIMsjJ2Hc",
+						"value": "{{TOKEN}}",
 						"type": "text"
 					}
 				],
@@ -204,12 +204,12 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ7XCJpZFwiOjEsXCJsb2dpblwiOlwiY2hlZjAxXCIsXCJwYXNzd29yZFwiOlwiU2VuaGFGb3J0ZTEyMyFcIixcInJvbGVcIjpcIlVTRVJcIixcImNyZWF0ZWRBdFwiOjE3NjE1MTg5MDAuNTY3OTY4MDAwLFwidXBkYXRlZEF0XCI6MTc2MTUxODkwMC41Njc5OTAwMDAsXCJkZWxldGVkQXRcIjpudWxsfSIsImlhdCI6MTc2MTUxOTE4NCwiZXhwIjoxNzYxNjA1NTg0fQ.IdL2umR_sSclk6lC8jRLbVcUdlZKXpuaOnB-aj5vOa4",
+						"value": "{{TOKEN}}",
 						"type": "text"
 					}
 				],
 				"url": {
-					"raw": "{{BASE_URL}}/api/v1/users/1",
+					"raw": "{{BASE_URL}}/api/v1/users/2",
 					"host": [
 						"{{BASE_URL}}"
 					],
@@ -217,7 +217,7 @@
 						"api",
 						"v1",
 						"users",
-						"1"
+						"2"
 					]
 				}
 			},
@@ -230,12 +230,12 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ7XCJpZFwiOjEsXCJsb2dpblwiOlwiY2hlZjAxXCIsXCJwYXNzd29yZFwiOlwiU2VuaGFGb3J0ZTEyMyFcIixcInJvbGVcIjpcIlVTRVJcIixcImNyZWF0ZWRBdFwiOjE3NjE1MTg5MDAuNTY3OTY4MDAwLFwidXBkYXRlZEF0XCI6MTc2MTUxODkwMC41Njc5OTAwMDAsXCJkZWxldGVkQXRcIjpudWxsfSIsImlhdCI6MTc2MTUxOTE4NCwiZXhwIjoxNzYxNjA1NTg0fQ.IdL2umR_sSclk6lC8jRLbVcUdlZKXpuaOnB-aj5vOa4",
+						"value": "{{TOKEN}}",
 						"type": "text"
 					}
 				],
 				"url": {
-					"raw": "{{BASE_URL}}/api/v1/users/findByName/dona",
+					"raw": "{{BASE_URL}}/api/v1/users/findByName/Root Admin",
 					"host": [
 						"{{BASE_URL}}"
 					],
@@ -244,7 +244,7 @@
 						"v1",
 						"users",
 						"findByName",
-						"dona"
+						"Root Admin"
 					]
 				}
 			},
@@ -257,13 +257,13 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "",
+						"value": "{{TOKEN}}",
 						"type": "text"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"login\": \"usuario01 - modificado\",\n  \"password\": \"SenhaForte123!\",\n  \"firstName\": \"Seu\",\n  \"lastName\": \"Zé\",\n  \"email\": \"seu2@ze.com\",\n  \"role\": \"cliente\",\n\n  \"postalCode\": \"01001-000\",\n  \"state\": \"SP\",\n  \"city\": \"São Paulo\",\n  \"street\": \"Praça da Só\",\n  \"number\": \"101\"\n}",
+					"raw": "{\n  \"firstName\": \"Seu\",\n  \"lastName\": \"Zé\",\n  \"email\": \"seu2@ze.com\",\n  \"postalCode\": \"01001-000\",\n  \"state\": \"SP\",\n  \"city\": \"São Paulo\",\n  \"street\": \"Praça da Só\",\n  \"number\": \"101\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -292,7 +292,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "",
+						"value": "{{TOKEN}}",
 						"type": "text"
 					}
 				],
@@ -301,7 +301,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "{{BASE_URL}}/api/v1/users/2",
+					"raw": "{{BASE_URL}}/api/v1/users/3",
 					"host": [
 						"{{BASE_URL}}"
 					],
@@ -309,7 +309,7 @@
 						"api",
 						"v1",
 						"users",
-						"2"
+						"3"
 					]
 				}
 			},
@@ -343,6 +343,10 @@
 	"variable": [
 		{
 			"key": "BASE_URL",
+			"value": ""
+		},
+		{
+			"key": "TOKEN",
 			"value": ""
 		}
 	]

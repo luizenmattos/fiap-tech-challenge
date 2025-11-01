@@ -73,7 +73,6 @@ public class UserController  {
             @RequestHeader(value = "Authorization", required = true) String token,
             @PathVariable String name
     ) {
-        System.out.println(name);
         List<UserResponse> usersResponse = new ArrayList<>();
 
         List<UserReadOutput> usersOutput = userCrudPort.findByName(token,name);

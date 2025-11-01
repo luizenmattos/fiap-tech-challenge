@@ -11,7 +11,30 @@ public class PasswordValidation extends DomainValidation<User> {
 
     @Override
     public void abstractValidation() {
-        if(entityToValidate.getPassword() == null){
-            throw new DomainException("Password is required");        }
+        String password = entityToValidate.getPassword();
+
+        if (password == null || password.isBlank()) {
+            throw new DomainException("Password is required.");
+        }
+
+        if (password.length() < 8) {
+            throw new DomainException("Password must be at least 8 characters long.");
+        }
+
+        if (!password.matches(".*[A-Z].*")) {
+            throw new DomainException("Password must contain at least one uppercase letter.");
+        }
+
+        if (!password.matches(".*[a-z].*")) {
+            throw new DomainException("Password must contain at least one lowercase letter.");
+        }
+
+        if (!password.matches(".*\\d.*")) {
+            throw new DomainException("Password must contain at least one digit.");
+        }
+
+        if (!password.matches(".*[!@#$%^&*(),.?\":{}|<>].*")) {
+            throw new DomainException("Password must contain at least one special character.");
+        }
     }
 }

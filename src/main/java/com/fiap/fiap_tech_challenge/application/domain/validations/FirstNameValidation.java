@@ -11,7 +11,18 @@ public class FirstNameValidation extends DomainValidation<Person> {
     
     @Override
     public void abstractValidation() {
-        if(entityToValidate.getFirstName() == null){
-            throw new DomainException("First name is required");        }
+        String firstName = entityToValidate.getFirstName();
+
+        if (firstName == null || firstName.isBlank()) {
+            throw new DomainException("First name is required");
+        }
+
+        if (firstName.length() < 2) {
+            throw new DomainException("First name must have at least 2 characters");
+        }
+
+        if (!firstName.matches("^[A-Za-zÀ-ÖØ-öø-ÿ'\\-\\s]+$")) {
+            throw new DomainException("First name contains invalid characters");
+        }
     }
 }

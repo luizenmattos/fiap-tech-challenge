@@ -11,7 +11,7 @@ public class LoginValidation extends DomainValidation<User> {
 
     @Override
     public void abstractValidation() {
-        if(entityToValidate.getLogin() == null){
+        if(entityToValidate.getLogin() == null || entityToValidate.getLogin().isBlank()){
             throw new DomainException("Login is required");        }
     }
 }

@@ -11,7 +11,16 @@ public class PostalCodeValidation extends DomainValidation<Address> {
 
     @Override
     public void abstractValidation() {
-        if(entityToValidate.getPostalCode() == null){
-            throw new DomainException("Postal code is required");        }
+        String postalCode = entityToValidate.getPostalCode();
+
+        if (postalCode == null || postalCode.isBlank()) {
+            throw new DomainException("Postal code is required");
+        }
+
+        postalCode = postalCode.trim();
+
+        if (!postalCode.matches("^\\d{5}-?\\d{3}$")) {
+            throw new DomainException("Invalid postal code format. Expected format: 12345-678");
+        }
     }
 }
