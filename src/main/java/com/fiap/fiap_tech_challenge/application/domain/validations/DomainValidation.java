@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import com.fiap.fiap_tech_challenge.application.domain.exception.DomainException;
 
-import lombok.extern.slf4j.Slf4j;
-
 public abstract class DomainValidation<T> {
 
     protected T entityToValidate;

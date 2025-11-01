@@ -1,7 +1,6 @@
 package com.fiap.fiap_tech_challenge.infrastructure.adapters.config;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fiap.fiap_tech_challenge.application.domain.User;
 import com.fiap.fiap_tech_challenge.application.domain.exception.InvalidOrExpiredToken;
