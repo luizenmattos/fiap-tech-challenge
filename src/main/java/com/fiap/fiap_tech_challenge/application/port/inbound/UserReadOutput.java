@@ -4,9 +4,11 @@ import java.time.Instant;
 
 import com.fiap.fiap_tech_challenge.application.domain.Address;
 import com.fiap.fiap_tech_challenge.application.domain.Person;
+import com.fiap.fiap_tech_challenge.application.domain.User;
 
 public record UserReadOutput(
     Long id, 
+    String role,
     String firstName, 
     String lastName, 
     String phone,
@@ -22,9 +24,10 @@ public record UserReadOutput(
     ) {
 
 
-    public static UserReadOutput newInstance(Long userId, Person person, Address address){
+    public static UserReadOutput newInstance(User user, Person person, Address address){
         return new UserReadOutput(
-            userId, 
+            user.getId(), 
+            user.getRole().name(), 
             person.getFirstName(), 
             person.getLastName(), 
             person.getPhone(),

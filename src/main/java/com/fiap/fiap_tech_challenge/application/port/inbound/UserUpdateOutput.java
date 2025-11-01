@@ -8,6 +8,7 @@ import com.fiap.fiap_tech_challenge.application.domain.User;
 
 public record UserUpdateOutput(
     Long id,
+    String role,
     String firstName,
     String lastName,
     String phone,
@@ -25,6 +26,7 @@ public record UserUpdateOutput(
     public static UserUpdateOutput newInstance(User user, Person person, Address address){
         return new UserUpdateOutput(
             user.getId(), 
+            user.getRole().name(),
             person.getFirstName(), 
             person.getLastName(), 
             person.getPhone(),

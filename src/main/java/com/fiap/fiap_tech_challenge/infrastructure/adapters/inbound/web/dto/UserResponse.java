@@ -19,6 +19,7 @@ public class UserResponse {
 
     private Long id;
     private String login;
+    private String role;
     private String firstName;
     private String lastName;
     private String phone;
@@ -40,6 +41,7 @@ public class UserResponse {
         var response = new UserResponse(); 
         response.setId(output.id());
         response.setLogin(output.login());
+        response.setRole(output.role());
         response.setFirstName(output.firstName());
         response.setLastName(output.lastName());
         response.setPhone(output.phone());
@@ -59,6 +61,7 @@ public class UserResponse {
     public static UserResponse fromOutput(UserReadOutput output){
         var response = new UserResponse(); 
         response.setId(output.id());
+        response.setRole(output.role());
         response.setFirstName(output.firstName());
         response.setLastName(output.lastName());
         response.setPhone(output.phone());
@@ -77,6 +80,7 @@ public class UserResponse {
     public static UserResponse fromOutput(UserUpdateOutput output){
         var response = new UserResponse(); 
         response.setId(output.id());
+        response.setRole(output.role());
         response.setFirstName(output.firstName());
         response.setLastName(output.lastName());
         response.setPhone(output.phone());

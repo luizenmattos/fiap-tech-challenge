@@ -9,6 +9,7 @@ import com.fiap.fiap_tech_challenge.application.domain.User;
 public record UserCreateOutput(
     Long id,
     String login,
+    String role,
     String firstName,
     String lastName,
     String phone,
@@ -27,6 +28,7 @@ public record UserCreateOutput(
         return new UserCreateOutput(
             user.getId(), 
             user.getLogin(), 
+            user.getRole().name(),
             person.getFirstName(), 
             person.getLastName(), 
             person.getPhone(),
