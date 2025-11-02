@@ -2,7 +2,6 @@ package com.fiap.fiap_tech_challenge.infrastructure.adapters.outbound.persistenc
 
 import com.fiap.fiap_tech_challenge.infrastructure.adapters.outbound.persistence.entity.PersonJpaEntity;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 

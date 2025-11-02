@@ -6,13 +6,6 @@ import com.fiap.fiap_tech_challenge.application.port.inbound.UserCrudPort;
 import com.fiap.fiap_tech_challenge.application.port.inbound.UserReadOutput;
 import com.fiap.fiap_tech_challenge.application.port.inbound.UserUpdateOutput;
 
-// import org.springframework.security.authentication.AuthenticationManager;
-// import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-// import org.springframework.security.core.Authentication;
-
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 
 import java.util.ArrayList;
@@ -80,7 +73,6 @@ public class UserController  {
             @RequestHeader(value = "Authorization", required = true) String token,
             @PathVariable String name
     ) {
-        System.out.println(name);
         List<UserResponse> usersResponse = new ArrayList<>();
 
         List<UserReadOutput> usersOutput = userCrudPort.findByName(token,name);

@@ -5,7 +5,7 @@ import org.springframework.http.ProblemDetail;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import com.fiap.fiap_tech_challenge.application.domain.exception.DataNotFoundException;
+import com.fiap.fiap_tech_challenge.application.domain.exception.EntityNotFoundException;
 import com.fiap.fiap_tech_challenge.application.domain.exception.DomainException;
 import com.fiap.fiap_tech_challenge.application.domain.exception.NotFindUserException;
 import com.fiap.fiap_tech_challenge.application.domain.exception.InvalidOrExpiredToken;
@@ -13,8 +13,8 @@ import com.fiap.fiap_tech_challenge.application.domain.exception.InvalidOrExpire
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(DataNotFoundException.class)
-    public ProblemDetail handleDataNotFoundException(DataNotFoundException ex) {
+    @ExceptionHandler(EntityNotFoundException.class)
+    public ProblemDetail handleEntityNotFoundException(EntityNotFoundException ex) {
         ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(
             HttpStatus.NOT_FOUND,
             ex.getMessage()
@@ -27,7 +27,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(NotFindUserException.class)
-    public ProblemDetail handleDataNotFoundException(NotFindUserException ex) {
+    public ProblemDetail handleNotFindUserException(NotFindUserException ex) {
         ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(
             HttpStatus.UNAUTHORIZED,
             ex.getMessage()
@@ -40,20 +40,20 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(DomainException.class)
-    public ProblemDetail handleDataNotFoundException(DomainException ex) {
+    public ProblemDetail handleDomainException(DomainException ex) {
         ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(
             HttpStatus.BAD_REQUEST,
-            ex.getMessage()
+            ex.getErrors()
         );
 
-        problemDetail.setTitle("Operation not allowed");
+        problemDetail.setTitle(ex.getMessage());
         problemDetail.setProperty("timestamp", System.currentTimeMillis());
 
         return problemDetail;
     }
 
     @ExceptionHandler(InvalidOrExpiredToken.class)
-    public ProblemDetail handleDataNotFoundException(InvalidOrExpiredToken ex) {
+    public ProblemDetail handleInvalidOrExpiredToken(InvalidOrExpiredToken ex) {
         ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(
             HttpStatus.UNAUTHORIZED,
             ex.getMessage()
@@ -72,7 +72,7 @@ public class GlobalExceptionHandler {
             ex.getMessage()
         );
 
-        problemDetail.setTitle("Intermal serve error");
+        problemDetail.setTitle("Internal serve error");
         problemDetail.setProperty("timestamp", System.currentTimeMillis());
 
         return problemDetail;

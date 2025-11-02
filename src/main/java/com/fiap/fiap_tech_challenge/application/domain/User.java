@@ -20,7 +20,6 @@ public class User {
         user.login = login;
         user.password = password;
         user.role = role;
-        user.role = UserRole.USER;
         user.createdAt = Instant.now();
         user.updatedAt = Instant.now();
 

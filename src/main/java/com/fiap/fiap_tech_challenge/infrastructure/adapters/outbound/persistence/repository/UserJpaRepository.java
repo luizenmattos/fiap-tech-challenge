@@ -2,6 +2,7 @@ package com.fiap.fiap_tech_challenge.infrastructure.adapters.outbound.persistenc
 
 import com.fiap.fiap_tech_challenge.infrastructure.adapters.outbound.persistence.entity.UserJpaEntity;
 
+import java.util.List;
 import java.util.Optional;
 
 import jakarta.transaction.Transactional;
@@ -17,6 +18,8 @@ public interface UserJpaRepository extends JpaRepository<UserJpaEntity, Long> {
     Optional<UserJpaEntity> findByIdAndDeletedAtIsNull(Long id);
 
     Optional<UserJpaEntity> findByLoginAndDeletedAtIsNull(String login);
+
+    List<UserJpaEntity> findAllByDeletedAtIsNull();
 
     @Modifying
     @Transactional

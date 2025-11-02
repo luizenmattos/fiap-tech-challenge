@@ -54,9 +54,8 @@ public class PersonRepositoryAdapter implements PersonRepositoryPort {
     }
 
    @Override
-    public boolean existsByEmail(String email) {
-        log.info("Verificando existência do e-mail: {}", email);
-        return personJpaRepository.findByEmailAndDeletedAtIsNull(email).isPresent();
+    public Optional<Person> findByEmail(String email) {
+        return personJpaRepository.findByEmailAndDeletedAtIsNull(email).map(this::toDomain);
     }
 
     PersonJpaEntity toEntity(Person person) {

@@ -1,12 +1,21 @@
 package com.fiap.fiap_tech_challenge.application.domain.exception;
 
-import lombok.extern.slf4j.Slf4j;
+import java.util.List;
 
-@Slf4j
 public class DomainException extends RuntimeException{
+
+    private List<String> errors;
+    
     public DomainException(String message){
         super(message);
-        log.info(message);
+    }
+    
+    public DomainException(List<String> errors){
+        super("Validation errors");
+        this.errors = errors;
     }
 
+    public String getErrors() {
+        return errors.toString();
+    }
 }

@@ -1,5 +1,7 @@
 package com.fiap.fiap_tech_challenge.application.port.inbound;
 
+import java.time.Instant;
+
 import com.fiap.fiap_tech_challenge.application.domain.Address;
 import com.fiap.fiap_tech_challenge.application.domain.Person;
 import com.fiap.fiap_tech_challenge.application.domain.User;
@@ -7,6 +9,7 @@ import com.fiap.fiap_tech_challenge.application.domain.User;
 public record UserCreateOutput(
     Long id,
     String login,
+    String role,
     String firstName,
     String lastName,
     String phone,
@@ -17,13 +20,15 @@ public record UserCreateOutput(
     String city,
     String street,
     String number,
-    String complement
+    String complement,
+    Instant updatedAt
     ) {
 
     public static UserCreateOutput fromDomain(User user, Person person, Address address){
         return new UserCreateOutput(
             user.getId(), 
             user.getLogin(), 
+            user.getRole().name(),
             person.getFirstName(), 
             person.getLastName(), 
             person.getPhone(),
@@ -34,7 +39,8 @@ public record UserCreateOutput(
             address.getCity(),
             address.getStreet(),
             address.getNumber(),
-            address.getComplement()
+            address.getComplement(),
+            person.getUpdatedAt()
             );
     }
 }

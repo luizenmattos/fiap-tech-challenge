@@ -9,6 +9,7 @@ import com.fiap.fiap_tech_challenge.application.domain.UserRole;
 // import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -25,6 +26,14 @@ public class UserReposotoryAdapter implements UserRepositoryPort {
         UserJpaEntity entity = toEntity(user);
         UserJpaEntity saved = userJpaRepository.save(entity);
         return Optional.of(toDomain(saved));
+    }
+
+    @Override
+    public List<User> findAll(){
+        return userJpaRepository.findAllByDeletedAtIsNull()
+            .stream()
+            .map(this::toDomain)
+            .toList();
     }
 
     @Override

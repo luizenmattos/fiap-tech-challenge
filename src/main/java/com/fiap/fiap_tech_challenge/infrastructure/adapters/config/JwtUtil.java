@@ -1,7 +1,6 @@
 package com.fiap.fiap_tech_challenge.infrastructure.adapters.config;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fiap.fiap_tech_challenge.application.domain.User;
 import com.fiap.fiap_tech_challenge.application.domain.exception.InvalidOrExpiredToken;
@@ -26,7 +25,6 @@ public class JwtUtil {
 
         // Converte o objeto em JSON String
         String jsonString = mapper.writeValueAsString(user);
-        System.out.println(jsonString);
         return Jwts.builder()
                 .setSubject(jsonString)
                 .setIssuedAt(now)
@@ -44,7 +42,6 @@ public class JwtUtil {
 
             ObjectMapper mapper = new ObjectMapper().findAndRegisterModules();
 
-            System.out.println(parsed.getBody().getSubject());
             return mapper.readValue(parsed.getBody().getSubject(), User.class);
 
 
