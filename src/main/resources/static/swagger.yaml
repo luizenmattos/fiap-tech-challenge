@@ -49,7 +49,7 @@ paths:
       summary: Create user
       description: This can only be done by the logged-in user.
       security:
-        - bearerAuth: []
+        - BearerAuth: []
       operationId: createUser
       requestBody:
         description: Created user object
@@ -170,7 +170,7 @@ paths:
       summary: Get all users
       description: Returns a list of all users.
       security:
-        - bearerAuth: []
+        - BearerAuth: []
       operationId: getAllUsers
       responses:
         '200':
@@ -188,7 +188,7 @@ paths:
       summary: Get user by ID
       description: Returns a single user.
       security:
-        - bearerAuth: []
+        - BearerAuth: []
       operationId: getUserByName
       parameters:
         - name: name
@@ -213,7 +213,7 @@ paths:
       summary: Get user by ID
       description: Returns a single user.
       security:
-        - bearerAuth: []
+        - BearerAuth: []
       operationId: getUserById
       parameters:
         - name: id
@@ -238,7 +238,7 @@ paths:
       summary: Delete user by ID
       description: This can only be done by the logged-in user.
       security:
-        - bearerAuth: []
+        - BearerAuth: []
       operationId: deleteUser
       parameters:
         - name: id
@@ -263,7 +263,7 @@ paths:
       summary: Update user by ID
       description: Updates an existing user with the given ID.
       security:
-        - bearerAuth: []
+        - BearerAuth: []
       operationId: updateUser
       parameters:
         - name: id
@@ -294,7 +294,7 @@ paths:
       summary: Change user password
       description: Update the password of the logged user.
       security:
-        - bearerAuth: []
+        - BearerAuth: []
       operationId: changeUserPassword
       requestBody:
         required: true
@@ -317,6 +317,13 @@ paths:
                 $ref: "#/components/schemas/InvalidToken"
 
 components:
+  securitySchemes:
+    BearerAuth:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: "Token JWT para autorização."
+
   schemas:
     User:
       type: object
@@ -434,10 +441,3 @@ components:
           type: string
           example: '2025-09-15 11:30:45'
 
-
-  securitySchemes:
-    bearerAuth:
-      type: apiKey
-      name: Authorization
-      in: header
-      description: "Token JWT para autorização."
