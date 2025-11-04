@@ -27,10 +27,10 @@ paths:
               properties:
                 login:
                   type: string
-                  example: 'joaomc123'
+                  example: 'root'
                 password:
                   type: string
-                  example: '12345566'
+                  example: 'root'
       responses:
         '200':
           description: Successful login
