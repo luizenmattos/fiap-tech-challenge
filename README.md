@@ -41,11 +41,3 @@ SPRING_DATASOURCE_URL=jdbc:postgresql://localhost:5432/techchallenge;
 SPRING_DATASOURCE_USERNAME=postgres;
 ```
 **Ajustar SPRING_DATASOURCE_PASSWORD localmente conforme necessário.
-
-#### Configurações (Profiles & Secrets)
-```
-SPRING_PROFILES_ACTIVE=prod 
-SPRING_DATASOURCE_URL
-Docker: jdbc:postgresql://postgres:5432/techchallenge
-Local: jdbc:postgresql://localhost:5432/techchallenge
-```
