@@ -1,203 +1,25 @@
 openapi: 3.0.4
 info:
-  title: Grupo 13 - Tech Challenger 1° Fase - 1.0
+  title: Grupo 13 - Tech Challenger 1° Fase
   description: |-
-    sistema robusto que permita a todos os
-    restaurantes gerenciar eficientemente suas operações, enquanto os clientes
-    poderão consultar informações, deixar avaliações e fazer pedidos online.
-    Devido à limitação de recursos financeiros, foi acordado que a entrega do
-    sistema será realizada em fases, garantindo que cada etapa seja desenvolvida
-    de forma cuidadosa e eficaz.
-  termsOfService: https://swagger.io/terms/
-  contact:
-    email: apiteam@swagger.io
-  license:
-    name: Apache 2.0
-    url: https://www.apache.org/licenses/LICENSE-2.0.html
-  version: 1.0.12
-externalDocs:
-  description: Find out more about Swagger
-  url: https://swagger.io
+    Sistema robusto que permita a todos os restaurantes gerenciar eficientemente suas operações, enquanto os clientes poderão consultar informações, deixar avaliações e fazer pedidos online.
+    Devido à limitação de recursos financeiros, foi acordado que a entrega do sistema será realizada em fases, garantindo que cada etapa seja desenvolvida de forma cuidadosa e eficaz.
+  version: 1.0.0
+
+
 servers:
-  - url: https://http://localhost:8080
+  - url: http://localhost:8080
+
 paths:
-  /user:
-    post:
-      tags:
-        - User
-      summary: Create user.
-      description: This can only be done by the logged in user.
-      operationId: createUser
-      requestBody:
-        description: Created user object
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                name:
-                  type: string
-                  example: John
-                email:
-                  type: string
-                  example: john@email.com
-                userlogin:
-                  type: string
-                  example: theUser
-                password:
-                  type: string
-                  example: '12345'
-                adress:
-                  type: string
-                  example: '12345'
-                tipoUser:
-                  type: string
-                  example: 'adm'
-      responses:
-        '200':
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/User'
-        default:
-          description: Unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-    get:
-      tags:
-        - User
-      summary: Logs user into the system.
-      description: Log into the system.
-      operationId: loginUser
-      responses:
-        '200':
-          description: successful operation
-          headers:
-            X-Rate-Limit:
-              description: calls per hour allowed by the user
-              schema:
-                type: integer
-                format: int32
-            X-Expires-After:
-              description: date in UTC when token expires
-              schema:
-                type: string
-                format: date-time
-          content:
-            application/xml:
-              schema:
-                type: string
-            application/json:
-              schema:
-                type: string
-        '400':
-          description: Invalid username/password supplied
-        default:
-          description: Unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-  /user/{id}:
-    delete:
-      tags:
-        - User
-      summary: Delete user resource.
-      description: This can only be done by the logged in user.
-      operationId: deleteUser
-      parameters:
-        - name: id
-          in: path
-          description: The name that needs to be deleted
-          required: true
-          schema:
-            type: number
-      responses:
-        '200':
-          description: User deleted
-        '400':
-          description: Invalid username supplied
-        '404':
-          description: User not found
-        default:
-          description: Unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-    put:
-      tags:
-        - User
-      summary: Creates list of users with given input array.
-      description: Creates list of users with given input array.
-      operationId: createUsersWithListInput
-      parameters:
-        - name: id
-          in: path
-          description: Id should be to change
-          required: true
-          schema:
-            type: number
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/User'
-      responses:
-        '200':
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/User'
-        default:
-          description: Unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-  /user/changepassword/{email}:
-    put:
-      tags:
-        - User
-      summary: Change user password
-description: Update the password for the user with the specified email.
-operationId: changeUserPassword
-
-      parameters:
-        - name: email
-          in: path
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                newpassword:
-                  type: string
-                  example: John
-
-      responses:
-        '200':
-          description: successful operation
-        default:
-          description: Unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
   /user/login:
     post:
       tags:
         - User
-      description: Log user out of the system.
+      summary: Log user into the system
+      description: Authenticates a user and returns a session token.
+      operationId: loginUserSession
       requestBody:
+        required: true
         content:
           application/json:
             schema:
@@ -205,10 +27,283 @@ operationId: changeUserPassword
               properties:
                 login:
                   type: string
-                  example: 'carlos123'
+                  example: 'joaomc123'
                 password:
                   type: string
                   example: '12345566'
+      responses:
+        '200':
+          description: Successful login
+        '401':
+          description: Unautorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InvalidToken"
+        
+
+  /user:
+    post:
+      tags:
+        - User
+      summary: Create user
+      description: This can only be done by the logged-in user.
+      operationId: createUser
+      requestBody:
+        description: Created user object
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                login:
+                  type: string
+                  example: admin
+                password:
+                  type: string
+                  example: 12345
+                firstName:
+                  type: string
+                  example: João
+                lastName:
+                  type: string
+                  example: Marcos
+                phone:
+                  type: string
+                  example: '9999999999'
+                email:
+                  type: string
+                  example: 'teste@gmail.com'
+                role:
+                  type: string
+                  example: 'client'
+                countryCode:
+                  type: string
+                  example: '+55'
+                postalCode:
+                  type: string
+                  example: '12345678932'
+                state:
+                  type: string
+                  example: 'São Paulo'
+                city:
+                  type: string
+                  example: 'Bauru'
+                street:
+                  type: string
+                  example: 'Rua exemplo'
+                number:
+                  type: string
+                  example: '321'
+                complement:
+                  type: string
+                  example: 'AP 123'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                  login:
+                    type: string
+                    example: admin
+                  firstName:
+                    type: string
+                    example: João
+                  lastName:
+                    type: string
+                    example: Marcos
+                  phone:
+                    type: string
+                    example: '9999999999'
+                  email:
+                    type: string
+                    example: 'teste@gmail.com'
+                  role:
+                    type: string
+                    example: 'client'
+                  countryCode:
+                    type: string
+                    example: '+55'
+                  postalCode:
+                    type: string
+                    example: '12345678932'
+                  state:
+                    type: string
+                    example: 'São Paulo'
+                  city:
+                    type: string
+                    example: 'Bauru'
+                  street:
+                    type: string
+                    example: 'Rua exemplo'
+                  number:
+                    type: string
+                    example: '321'
+                  complement:
+                    type: string
+                    example: 'AP 123'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BadRequest"
+        '401':
+          description: Unautorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InvalidToken"
+
+    get:
+      tags:
+        - User
+      summary: Get all users
+      description: Returns a list of all users.
+      operationId: getAllUsers
+      responses:
+        '200':
+          description: Successful operation
+        '401':
+          description: Unautorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InvalidToken"
+  /user/findByName/{name}:
+    get:
+      tags:
+        - User
+      summary: Get user by ID
+      description: Returns a single user.
+      operationId: getUserByName
+      parameters:
+        - name: name
+          in: path
+          description: Name of the user
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+        '401':
+          description: Unautorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InvalidToken"
+  /user/{id}:
+    get:
+      tags:
+        - User
+      summary: Get user by ID
+      description: Returns a single user.
+      operationId: getUserById
+      parameters:
+        - name: id
+          in: path
+          description: ID of user to return
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful operation
+        '401':
+          description: Unautorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InvalidToken"
+
+    delete:
+      tags:
+        - User
+      summary: Delete user by ID
+      description: This can only be done by the logged-in user.
+      operationId: deleteUser
+      parameters:
+        - name: id
+          in: path
+          description: The user ID that needs to be deleted
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful operation
+        '401':
+          description: Unautorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InvalidToken"
+
+    put:
+      tags:
+        - User
+      summary: Update user by ID
+      description: Updates an existing user with the given ID.
+      operationId: updateUser
+      parameters:
+        - name: id
+          in: path
+          description: ID of the user to update
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '200':
+          description: Successful operation
+        '401':
+          description: Unautorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InvalidToken"
+                
+
+  /user/new-password:
+    put:
+      tags:
+        - User
+      summary: Change user password
+      description: Update the password of the logged user.
+      operationId: changeUserPassword
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                password:
+                  type: string
+                  example: 'newpassword123'
+      responses:
+        '200':
+          description: Successful operation
+        '401':
+          description: Unautorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/InvalidToken"
+
 components:
   schemas:
     User:
@@ -218,44 +313,126 @@ components:
           type: integer
           format: int64
           example: 1
-        name:
+        login:
           type: string
-          example: John
+          example: admin
+        firstName:
+          type: string
+          example: João
+        lastName:
+          type: string
+          example: Marcos
+        phone:
+          type: string
+          example: '9999999999'
         email:
           type: string
-          example: john@email.com
-        userlogin:
+          example: 'teste@gmail.com'
+        role:
           type: string
-          example: theUser
-        password:
+          example: 'client'
+        countryCode:
           type: string
-          example: '12345'
-        adress:
+          example: '+55'
+        postalCode:
           type: string
-          example: '12345'
-    Error:
+          example: '12345678932'
+        state:
+          type: string
+          example: 'São Paulo'
+        city:
+          type: string
+          example: 'Bauru'
+        street:
+          type: string
+          example: 'Rua exemplo'
+        number:
+          type: string
+          example: '321'
+        complement:
+          type: string
+          example: 'AP 123'
+          
+
+    NotFound:
       type: object
       properties:
-        code:
+        type:
           type: string
-        message:
+          example: about:blank
+        title:
           type: string
-        datatime:
+          example: Resource not found
+        status:
+          type: string
+          example: 404
+        detail:
+          type: string
+          example: Resource not found
+        instance:
+          type: string
+          example: /api/v1/users
+        timestamp:
           type: string
           example: '2025-09-15 11:30:45'
-      required:
-        - code
-        - message
+          
+          
+    BadRequest:
+      type: object
+      properties:
+        type:
+          type: string
+          example: about:blank
+        title:
+          type: string
+          example: Multiple errors
+        status:
+          type: string
+          example: 400
+        detail:
+          type: string
+          example: ['Email is required.']
+        instance:
+          type: string
+          example: /api/v1/users
+        timestamp:
+          type: string
+          example: '2025-09-15 11:30:45'
+
+
+    InvalidToken:
+      type: object
+      properties:
+        type:
+          type: string
+          example: about:blank
+        title:
+          type: string
+          example: Operation not allowed
+        status:
+          type: string
+          example: 401
+        detail:
+          type: string
+          example: Operation not allowed
+        instance:
+          type: string
+          example: /api/v1/users
+        timestamp:
+          type: string
+          example: '2025-09-15 11:30:45'
+
+
   securitySchemes:
+    api_key:
+      type: apiKey
+      name: api_key
+      in: header
     petstore_auth:
       type: oauth2
       flows:
         implicit:
           authorizationUrl: https://petstore3.swagger.io/oauth/authorize
           scopes:
-            "write:pets": modify pets in your account
-            "read:pets": read your pets
-    api_key:
-      type: apiKey
-      name: api_key
-      in: header
+            write:pets: modify pets in your account
+            read:pets: read your pets
