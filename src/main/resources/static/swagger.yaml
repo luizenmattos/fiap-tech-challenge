@@ -8,10 +8,10 @@ info:
 
 
 servers:
-  - url: http://localhost:8080
+  - url: http://192.168.18.34:8080
 
 paths:
-  /user/login:
+  /api/v1/users/login:
     post:
       tags:
         - User
@@ -42,12 +42,14 @@ paths:
                 $ref: "#/components/schemas/InvalidToken"
         
 
-  /user:
+  /api/v1/users:
     post:
       tags:
         - User
       summary: Create user
       description: This can only be done by the logged-in user.
+      security:
+        - bearerAuth: []
       operationId: createUser
       requestBody:
         description: Created user object
@@ -167,6 +169,8 @@ paths:
         - User
       summary: Get all users
       description: Returns a list of all users.
+      security:
+        - bearerAuth: []
       operationId: getAllUsers
       responses:
         '200':
@@ -177,12 +181,14 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/InvalidToken"
-  /user/findByName/{name}:
+  /api/v1/users/findByName/{name}:
     get:
       tags:
         - User
       summary: Get user by ID
       description: Returns a single user.
+      security:
+        - bearerAuth: []
       operationId: getUserByName
       parameters:
         - name: name
@@ -200,12 +206,14 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/InvalidToken"
-  /user/{id}:
+  /api/v1/users/{id}:
     get:
       tags:
         - User
       summary: Get user by ID
       description: Returns a single user.
+      security:
+        - bearerAuth: []
       operationId: getUserById
       parameters:
         - name: id
@@ -229,6 +237,8 @@ paths:
         - User
       summary: Delete user by ID
       description: This can only be done by the logged-in user.
+      security:
+        - bearerAuth: []
       operationId: deleteUser
       parameters:
         - name: id
@@ -252,6 +262,8 @@ paths:
         - User
       summary: Update user by ID
       description: Updates an existing user with the given ID.
+      security:
+        - bearerAuth: []
       operationId: updateUser
       parameters:
         - name: id
@@ -275,14 +287,14 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/InvalidToken"
-                
-
-  /user/new-password:
+  /api/v1/users/new-password:
     put:
       tags:
         - User
       summary: Change user password
       description: Update the password of the logged user.
+      security:
+        - bearerAuth: []
       operationId: changeUserPassword
       requestBody:
         required: true
@@ -371,7 +383,7 @@ components:
           example: Resource not found
         instance:
           type: string
-          example: /api/v1/users
+          example: /api/v1/api/v1/users
         timestamp:
           type: string
           example: '2025-09-15 11:30:45'
@@ -394,7 +406,7 @@ components:
           example: ['Email is required.']
         instance:
           type: string
-          example: /api/v1/users
+          example: /api/v1/api/v1/users
         timestamp:
           type: string
           example: '2025-09-15 11:30:45'
@@ -417,22 +429,14 @@ components:
           example: Operation not allowed
         instance:
           type: string
-          example: /api/v1/users
+          example: /api/v1/api/v1/users
         timestamp:
           type: string
           example: '2025-09-15 11:30:45'
 
 
   securitySchemes:
-    api_key:
-      type: apiKey
-      name: api_key
-      in: header
-    petstore_auth:
-      type: oauth2
-      flows:
-        implicit:
-          authorizationUrl: https://petstore3.swagger.io/oauth/authorize
-          scopes:
-            write:pets: modify pets in your account
-            read:pets: read your pets
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
