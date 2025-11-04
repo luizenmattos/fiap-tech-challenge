@@ -8,7 +8,7 @@ info:
 
 
 servers:
-  - url: http://192.168.18.34:8080
+  - url: http://localhost:8080
 
 paths:
   /api/v1/users/login:
@@ -303,7 +303,7 @@ paths:
             schema:
               type: object
               properties:
-                password:
+                newPassword:
                   type: string
                   example: 'newpassword123'
       responses:
@@ -437,6 +437,7 @@ components:
 
   securitySchemes:
     bearerAuth:
-      type: http
-      scheme: bearer
-      bearerFormat: JWT
+      type: apiKey
+      name: Authorization
+      in: header
+      description: "Token JWT para autorização."
